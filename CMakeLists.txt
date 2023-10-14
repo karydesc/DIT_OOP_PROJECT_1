@@ -6,9 +6,12 @@ set(CMAKE_CXX_STANDARD 17)
 
 
 add_executable(DIT_OOP_PROJECT_1
-        main.cpp
-        ./source/pomodoro.cpp
-        ./source/pomodoro.h
+        source/pomodoro.cpp
+        source/pomodoro.h
+        source/mainFrame.cpp
+        source/mainFrame.h
+        source/myApp.cpp
+        source/myApp.h
 )
 find_package(wxWidgets REQUIRED gl core base OPTIONAL_COMPONENTS net gui)
 include(${wxWidgets_USE_FILE})

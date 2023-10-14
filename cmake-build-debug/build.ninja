@@ -49,17 +49,25 @@ cmake_ninja_workdir = /Users/christoskarydis/Documents/Uni/Semester$ 3/OOP/DIT-O
 
 build cmake_object_order_depends_target_DIT_OOP_PROJECT_1: phony || CMakeFiles/DIT_OOP_PROJECT_1.dir
 
-build CMakeFiles/DIT_OOP_PROJECT_1.dir/main.cpp.o: CXX_COMPILER__DIT_OOP_PROJECT_1_unscanned_Debug /Users/christoskarydis/Documents/Uni/Semester$ 3/OOP/DIT-OOP-PROJECT_1/main.cpp || cmake_object_order_depends_target_DIT_OOP_PROJECT_1
-  DEFINES = -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -D__WXMAC__ -D__WXOSX_COCOA__ -D__WXOSX__
-  DEP_FILE = CMakeFiles/DIT_OOP_PROJECT_1.dir/main.cpp.o.d
-  FLAGS = -g -std=gnu++17 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fcolor-diagnostics
-  INCLUDES = -isystem /usr/local/lib/wx/include/osx_cocoa-unicode-3.2 -isystem /usr/local/include/wx-3.2
-  OBJECT_DIR = CMakeFiles/DIT_OOP_PROJECT_1.dir
-  OBJECT_FILE_DIR = CMakeFiles/DIT_OOP_PROJECT_1.dir
-
 build CMakeFiles/DIT_OOP_PROJECT_1.dir/source/pomodoro.cpp.o: CXX_COMPILER__DIT_OOP_PROJECT_1_unscanned_Debug /Users/christoskarydis/Documents/Uni/Semester$ 3/OOP/DIT-OOP-PROJECT_1/source/pomodoro.cpp || cmake_object_order_depends_target_DIT_OOP_PROJECT_1
   DEFINES = -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -D__WXMAC__ -D__WXOSX_COCOA__ -D__WXOSX__
   DEP_FILE = CMakeFiles/DIT_OOP_PROJECT_1.dir/source/pomodoro.cpp.o.d
+  FLAGS = -g -std=gnu++17 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fcolor-diagnostics
+  INCLUDES = -isystem /usr/local/lib/wx/include/osx_cocoa-unicode-3.2 -isystem /usr/local/include/wx-3.2
+  OBJECT_DIR = CMakeFiles/DIT_OOP_PROJECT_1.dir
+  OBJECT_FILE_DIR = CMakeFiles/DIT_OOP_PROJECT_1.dir/source
+
+build CMakeFiles/DIT_OOP_PROJECT_1.dir/source/mainFrame.cpp.o: CXX_COMPILER__DIT_OOP_PROJECT_1_unscanned_Debug /Users/christoskarydis/Documents/Uni/Semester$ 3/OOP/DIT-OOP-PROJECT_1/source/mainFrame.cpp || cmake_object_order_depends_target_DIT_OOP_PROJECT_1
+  DEFINES = -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -D__WXMAC__ -D__WXOSX_COCOA__ -D__WXOSX__
+  DEP_FILE = CMakeFiles/DIT_OOP_PROJECT_1.dir/source/mainFrame.cpp.o.d
+  FLAGS = -g -std=gnu++17 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fcolor-diagnostics
+  INCLUDES = -isystem /usr/local/lib/wx/include/osx_cocoa-unicode-3.2 -isystem /usr/local/include/wx-3.2
+  OBJECT_DIR = CMakeFiles/DIT_OOP_PROJECT_1.dir
+  OBJECT_FILE_DIR = CMakeFiles/DIT_OOP_PROJECT_1.dir/source
+
+build CMakeFiles/DIT_OOP_PROJECT_1.dir/source/myApp.cpp.o: CXX_COMPILER__DIT_OOP_PROJECT_1_unscanned_Debug /Users/christoskarydis/Documents/Uni/Semester$ 3/OOP/DIT-OOP-PROJECT_1/source/myApp.cpp || cmake_object_order_depends_target_DIT_OOP_PROJECT_1
+  DEFINES = -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -D__WXMAC__ -D__WXOSX_COCOA__ -D__WXOSX__
+  DEP_FILE = CMakeFiles/DIT_OOP_PROJECT_1.dir/source/myApp.cpp.o.d
   FLAGS = -g -std=gnu++17 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fcolor-diagnostics
   INCLUDES = -isystem /usr/local/lib/wx/include/osx_cocoa-unicode-3.2 -isystem /usr/local/include/wx-3.2
   OBJECT_DIR = CMakeFiles/DIT_OOP_PROJECT_1.dir
@@ -73,7 +81,7 @@ build CMakeFiles/DIT_OOP_PROJECT_1.dir/source/pomodoro.cpp.o: CXX_COMPILER__DIT_
 #############################################
 # Link the executable DIT_OOP_PROJECT_1
 
-build DIT_OOP_PROJECT_1: CXX_EXECUTABLE_LINKER__DIT_OOP_PROJECT_1_Debug CMakeFiles/DIT_OOP_PROJECT_1.dir/main.cpp.o CMakeFiles/DIT_OOP_PROJECT_1.dir/source/pomodoro.cpp.o
+build DIT_OOP_PROJECT_1: CXX_EXECUTABLE_LINKER__DIT_OOP_PROJECT_1_Debug CMakeFiles/DIT_OOP_PROJECT_1.dir/source/pomodoro.cpp.o CMakeFiles/DIT_OOP_PROJECT_1.dir/source/mainFrame.cpp.o CMakeFiles/DIT_OOP_PROJECT_1.dir/source/myApp.cpp.o
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk
   LINK_LIBRARIES = -L/usr/local/lib  -framework IOKit  -framework Carbon  -framework Cocoa  -framework QuartzCore  -framework AudioToolbox  -framework System  -framework OpenGL  -lwx_osx_cocoau_gl-3.2  -lwx_osx_cocoau_core-3.2  -lwx_baseu-3.2
   OBJECT_DIR = CMakeFiles/DIT_OOP_PROJECT_1.dir
