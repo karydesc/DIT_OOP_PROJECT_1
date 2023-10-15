@@ -5,16 +5,16 @@
 #include "pomodoro.h"
 #include <iostream>
 #include <unistd.h>
+#include <wx/wx.h>
 
 using namespace std;
 int i=0;
-void pomodoro::startSession(int mins) {
-    mins=mins*60;
+void pomodoro::startSession(int mins,wxStaticText* text) {
+    //mins=mins*60;
     while (i<=mins){
         sleep(1);
-        cout<<"\t\r" <<  i++ << flush;
+        text->SetLabelText(to_string(i++));
 
     }
-    cout << "\t\rFinished!"<<flush;
     sleep(1);
 }
