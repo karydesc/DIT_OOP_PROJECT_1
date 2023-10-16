@@ -12,8 +12,7 @@
 bool myApp::OnInit(){
     mainFrame* MainFrame = new mainFrame("DIT-OOP-PROJECT_1-2708");//New instance of mainframe with title argument
     MainFrame->Show(true);//calling show method of the object as it is hidden by default
-    MainFrame->Center(true);
-    MainFrame->SetClientSize(800,600);
+    MainFrame->SetClientSize(650,350);
 
 
     return true; //returning true tells wxwidgets that the program can resume

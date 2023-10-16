@@ -8,7 +8,15 @@
 
 class pomodoro {
 public:
-    static void startSession(int,wxStaticText*);
+     void startSession(int,int,wxStaticText*,wxGauge*,pomodoro*);
+     void pauseSession();
+     void getStatistics();
+     bool cancelFlag=false;
+private:
+int totalWorkTime;
+
+int sessionsCompleted;
+bool pauseflag=false;
 };
 
 

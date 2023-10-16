@@ -6,23 +6,75 @@
 #include <wx/wx.h>
 #include <wx/spinctrl.h>
 #include "pomodoro.h"
+#include <iostream>
 #include <unistd.h>
-//constructor implementation
-mainFrame::mainFrame(const wxString& title) : wxFrame(nullptr,wxID_ANY,title){ //calling the constructor of the base class
-    wxPanel* headerpanel =new wxPanel(this);
-    headerpanel->SetFont(this->GetFont().Scale(2.0));
-    wxPanel* panel = new wxPanel(this); //panel is needed to contain controls
-    wxButton* startbutton = new wxButton(panel,wxID_ANY,"Start",wxPoint(35,255),wxSize(100,35));
-    wxButton* pausebutton = new wxButton(panel,wxID_ANY,"Pause",wxPoint(150,255),wxSize(100,35));
-    wxGauge*gauge = new wxGauge(panel, wxID_ANY, 100, wxPoint (550, 263), wxSize(200, -1));
-    wxSpinCtrl* timeselect = new wxSpinCtrl(panel,wxID_ANY,"",wxPoint(265,263),wxSize(100,20)); //this will be used to select times for pomodoro and break
-    wxSpinCtrl* sessionselect = new wxSpinCtrl(panel,wxID_ANY,"",wxPoint(380,263),wxSize(100,20));
-    timeselect->SetValue(25); //Setting the default values as per Project instructions.
-    sessionselect->SetValue(5);
-    wxStaticText* header = new wxStaticText(headerpanel,wxID_ANY,"Pomodoro GUI",wxPoint(50,10),wxSize(200,30)); //creating simple header
-    wxStaticText* Timer = new wxStaticText(headerpanel,wxID_ANY,"Timer text here",wxPoint(160,150),wxSize(200,30)); //Creating a text field were the running time will be displayed
-    //pomodoro::startSession(5,Timer);
+#include <wx/string.h>
 
+using namespace std;
+
+enum IDs{
+    startButtonID=2,
+    pauseButtonID=3,
+    statButtonID=4,
+    cancelButtonID=5
+};
+wxBEGIN_EVENT_TABLE(mainFrame,wxFrame)
+                EVT_BUTTON(startButtonID,mainFrame::onStartButtonClick)
+                EVT_BUTTON(pauseButtonID,mainFrame::onPauseButtonClick)
+                EVT_BUTTON(statButtonID,mainFrame::onStatButtonClick)
+                EVT_BUTTON(cancelButtonID,mainFrame::onCancelButtonClick)
+
+wxEND_EVENT_TABLE();
+
+
+//constructor implementation
+mainFrame::mainFrame(const wxString& title) : wxFrame(nullptr,wxID_ANY,title) { //calling the constructor of the base class
+
+    panel = new wxPanel(this); //panel is needed to contain controls
+    headerpanel = new wxPanel(panel);
+
+    headerpanel->SetFont(this->GetFont().Scale(2.0));
+
+    startButton = new wxButton(panel, startButtonID, "Start", wxPoint(35, 255), wxSize(100, 35));
+
+    pauseButton = new wxButton(panel, pauseButtonID, "(un)/Pause", wxPoint(150, 255), wxSize(100, 35));
+
+    gauge = new wxGauge(panel, wxID_ANY, 100, wxPoint(400, 10), wxSize(200, -1));
+
+    timeselect = new wxSpinCtrl(panel, wxID_ANY, "", wxPoint(265, 262),wxSize(100, 20)); //this will be used to select times for pomodoro and break
+
+    breakselect = new wxSpinCtrl(panel, wxID_ANY, "", wxPoint(380, 262), wxSize(100, 20));
+
+    timeselect->SetValue(25); //Setting the default values as per Project instructions.
+
+    breakselect->SetValue(5);
+
+    wxStaticText *header = new wxStaticText(headerpanel, wxID_ANY, "Pomodoro GUI", wxPoint(50, 10),wxSize(200, 30)); //creating simple header
+
+    Timer = new wxStaticText(headerpanel, wxID_ANY, "Press start to initiate a session", wxPoint(160, 150), wxSize(200,30)); //Creating a text field were the running time will be displayed
+
+    statButton = new wxButton(panel,statButtonID,"Get Statistics", wxPoint(500, 255), wxSize(100, 35));
+
+    cancelButton = new wxButton(panel,cancelButtonID,"Cancel", wxPoint(35, 285), wxSize(100, 35));
+    CreateStatusBar();
 
 }
+pomodoro* session = new pomodoro;
+
+void mainFrame::onStartButtonClick(wxCommandEvent &evt) {
+    session->startSession(timeselect->GetValue(),breakselect->GetValue(),Timer,gauge,session);
+}
+
+void mainFrame::onPauseButtonClick(wxCommandEvent &evt) {
+  session->pauseSession();
+}
+
+void mainFrame::onStatButtonClick(wxCommandEvent &evt) {
+    session->getStatistics();
+}
+void mainFrame::onCancelButtonClick(wxCommandEvent &evt) {
+    session->cancelFlag=true;
+}
+
+
 
