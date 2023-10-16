@@ -20,50 +20,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ccf296e-503f-4fdf-936c-b55e36e42455" name="Changes" comment="I have implemented a simple UI structure with buttons and selectors. Next I will learn how to add eventhandlers.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/cache-v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/cmakeFiles-v1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/codemodel-v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/toolchains-v1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-e4f5707bbab25066bf39.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-09027fc0fa0b54653730.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-7c1512638419c534f6f2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/directory-.-Debug-f5ebdc15457944623624.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2023-10-15T15-05-51-0710.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-DIT_OOP_PROJECT_1-Debug-e61edd9ffd2623d7a45d.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/toolchains-v1-692b59c6c9b5ab07adbc.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.26.4/CMakeCCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.26.4/CMakeCXXCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.26.4/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.26.4/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.26.4/CMakeSystem.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdC/CMakeCCompilerId.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdCXX/CMakeCXXCompilerId.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DIT_OOP_PROJECT_1.dir/source/mainFrame.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DIT_OOP_PROJECT_1.dir/source/myApp.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DIT_OOP_PROJECT_1.dir/source/pomodoro.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/cmake.check_cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/rules.ninja" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/DIT_OOP_PROJECT_1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/mainFrame.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/mainFrame.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/mainFrame.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/mainFrame.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/myApp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/myApp.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/pomodoro.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/pomodoro.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/pomodoro.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/pomodoro.h" afterDir="false" />
-    </list>
+    <list default="true" id="2ccf296e-503f-4fdf-936c-b55e36e42455" name="Changes" comment="Project is almost complete. Implemented a working session manager, cancel pause and start buttons, ability to see statistics. and many others" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -141,7 +98,7 @@
       <updated>1697365511321</updated>
       <workItem from="1697365512337" duration="7768000" />
       <workItem from="1697457025925" duration="9556000" />
-      <workItem from="1697477658456" duration="7657000" />
+      <workItem from="1697477658456" duration="7874000" />
     </task>
     <task id="LOCAL-00001" summary="Experimenting with different UI elements as I'm leaning to use wxWidgets.">
       <option name="closed" value="true" />
@@ -159,7 +116,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697413825069</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Project is almost complete. Implemented a working session manager, cancel pause and start buttons, ability to see statistics. and many others">
+      <option name="closed" value="true" />
+      <created>1697487064869</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1697487064869</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,6 +139,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Experimenting with different UI elements as I'm leaning to use wxWidgets." />
     <MESSAGE value="I have implemented a simple UI structure with buttons and selectors. Next I will learn how to add eventhandlers." />
-    <option name="LAST_COMMIT_MESSAGE" value="I have implemented a simple UI structure with buttons and selectors. Next I will learn how to add eventhandlers." />
+    <MESSAGE value="Project is almost complete. Implemented a working session manager, cancel pause and start buttons, ability to see statistics. and many others" />
+    <option name="LAST_COMMIT_MESSAGE" value="Project is almost complete. Implemented a working session manager, cancel pause and start buttons, ability to see statistics. and many others" />
   </component>
 </project>
