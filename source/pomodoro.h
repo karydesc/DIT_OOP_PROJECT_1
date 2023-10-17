@@ -11,10 +11,11 @@ public:
      void startSession(int,int,wxStaticText*,wxGauge*,pomodoro*);
      void pauseSession();
      void getStatistics();
-     bool cancelFlag=false;
+     void cancelSession(wxStaticText*,wxGauge*);
+
 private:
 int totalWorkTime;
-
+bool cancelFlag=false;
 int sessionsCompleted;
 bool pauseflag=false;
 };

@@ -9,7 +9,9 @@
 #include <iostream>
 #include <unistd.h>
 #include <wx/string.h>
+#include "myApp.h"
 
+DECLARE_APP(myApp)
 using namespace std;
 
 enum IDs{
@@ -56,14 +58,38 @@ mainFrame::mainFrame(const wxString& title) : wxFrame(nullptr,wxID_ANY,title) { 
     statButton = new wxButton(panel,statButtonID,"Get Statistics", wxPoint(500, 255), wxSize(100, 35));
 
     cancelButton = new wxButton(panel,cancelButtonID,"Cancel", wxPoint(35, 285), wxSize(100, 35));
-    CreateStatusBar();
 
+    this->Bind(wxEVT_CLOSE_WINDOW, &mainFrame::OnClose, this);
+
+
+
+
+
+
+    CreateStatusBar();
 }
 pomodoro* session = new pomodoro;
 
 void mainFrame::onStartButtonClick(wxCommandEvent &evt) {
-    session->startSession(timeselect->GetValue(),breakselect->GetValue(),Timer,gauge,session);
+
+    if (!this->processing) {
+
+        if (this->backgroundThread.joinable())//reset thread if it's still running
+        {
+            this->backgroundThread.join();
+        }
+        this->processing = true; //setting flags
+
+        const auto f = [this]() {
+            session->startSession(timeselect->GetValue(), breakselect->GetValue(), Timer, gauge, session);
+            wxGetApp().CallAfter([this]() {
+                this->processing = false;
+            });
+        };
+        this->backgroundThread = std::thread{f};
+    }
 }
+
 
 void mainFrame::onPauseButtonClick(wxCommandEvent &evt) {
   session->pauseSession();
@@ -73,8 +99,18 @@ void mainFrame::onStatButtonClick(wxCommandEvent &evt) {
     session->getStatistics();
 }
 void mainFrame::onCancelButtonClick(wxCommandEvent &evt) {
-    session->cancelFlag=true;
+    session->cancelSession(this->Timer,this->gauge);
 }
 
 
-
+void mainFrame::OnClose(wxCloseEvent&e){
+    if (this->processing)
+    {
+        e.Veto(false);
+        this->Destroy();
+    }
+    else
+    {
+        this->Destroy();
+    }
+}

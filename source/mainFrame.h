@@ -6,6 +6,8 @@
 #define DIT_OOP_PROJECT_1_MAINFRAME_H
 #include <wx/wx.h>
 #include <wx/spinctrl.h>
+#include <thread>
+
 
 //declare mainframe class, inherit from wxFrame
 class mainFrame : public wxFrame {
@@ -22,10 +24,13 @@ private:
     wxPanel* panel;
     wxButton* statButton;
     wxButton* cancelButton;
+    bool processing=false;
+    std::thread backgroundThread;
     void onStartButtonClick(wxCommandEvent& evt);
     void onPauseButtonClick(wxCommandEvent& evt);
     void onStatButtonClick(wxCommandEvent& evt);
     void onCancelButtonClick(wxCommandEvent& evt);
+    void OnClose(wxCloseEvent &e);
     wxDECLARE_EVENT_TABLE();
 };
 

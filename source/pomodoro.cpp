@@ -7,79 +7,81 @@
 #include <wx/wx.h>
 #include <unistd.h>
 #include <wx/string.h>
-#include <wx/string.h>
+#include <thread>
+#include "myApp.h"
+#include <mutex>
+#include <condition_variable>
 
 
 using namespace std;
 int seconds;
 int j=0;
 int secondspassed;
+wxDECLARE_APP(myApp);
 void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,wxGauge* gauge,pomodoro* session) {
+    std::mutex mtx;
+    std::condition_variable pauseCondition;  // Condition variable for signaling
+    std::unique_lock<std::mutex> lock(mtx);
     start:
-    cancelFlag=false;
     secondspassed=0;
     seconds=workminutes*60;
     for (int i=seconds;i>=0;i--){
-        while(pauseflag){
-            if (this->cancelFlag){
-                text->SetLabelText("Press start to initiate a session");
-                return;}
-            wxYield();
+        if (session->pauseflag) {
+            // Wait until the flag changes (unpaused)
+            pauseCondition.wait(lock, [&]() { return !session->pauseflag; });
         }
-        j=0;
-        while(j<=100){ //Instead of using sleep(1000) which pauses the main thread for a whole second (which means the UI lags) I decided to divide the time tick into 100*10ms parts, in each of which the ui is updated.
-            //this is done to avoid using multithreading because I dont know how to do it and it makes me want to cry
-            if (this->cancelFlag){
-                text->SetLabelText("Press start to initiate a session");
-                return;}
-            wxYield();
-            usleep(10000);
-            j++;
+        if (this->cancelFlag){
+            cancelSession(text,gauge);
+            return;
 
         }
+        sleep(1);
         secondspassed++;
         session->totalWorkTime++;
-        wxYield();
-        text->SetLabelText(wxString::Format("Focus: %d:%02d",i/60,i%60)); //updating the timer
-        gauge->SetRange(seconds); //variable gauge range
-        gauge->SetValue(secondspassed);
+        wxGetApp().CallAfter([this,i,text,gauge](){
+            text->SetLabelText(wxString::Format("Focus: %d:%02d",i/60,i%60)); //updating the timer
+            gauge->SetRange(seconds); //variable gauge range
+            gauge->SetValue(secondspassed);
+        });
+
+
     }
     secondspassed=0;
     seconds=breakminutes*60;
-    for(int k=seconds;k>=0;k--) {
-
-        seconds=breakminutes*60;
-        while(pauseflag){
-            wxYield();
-            if (this->cancelFlag){
-                text->SetLabelText("Press start to initiate a session");
-                return;}
+    for(int i=seconds;i>=0;i--) {
+        if (session->pauseflag) {
+            // Wait until the flag changes (unpaused)
+            pauseCondition.wait(lock, [&]() { return !this->pauseflag; });
         }
-        j=0;
-        while(j<=100){ //Instead of using sleep(1000) which pauses the main thread for a whole second (which means the UI lags) I decided to divide the time tick into 100*10ms parts, in each of which the ui is updated.
-            //this is done to avoid using multithreading because I dont know how to do it and it makes me want to cry
-            wxYield();
-            usleep(10000);
-            j++;
-            if (this->cancelFlag){
-                text->SetLabelText("Press start to initiate a session");
-                return;}
-        }
+        sleep(1);
         secondspassed++;
         session->totalWorkTime++;
-        wxYield();
-        text->SetLabelText(wxString::Format("Break: %d:%02d",k/60,k%60)); //updating the timer
-        gauge->SetRange(seconds); //variable gauge range
-        gauge->SetValue(secondspassed);
+        if (this->cancelFlag){
+            cancelSession(text,gauge);
+            return;
+
+        }
+
+        wxGetApp().CallAfter([this,i,text,gauge](){
+            text->SetLabelText(wxString::Format("Break: %d:%02d",i/60,i%60)); //updating the timer
+            gauge->SetRange(seconds); //variable gauge range
+            gauge->SetValue(secondspassed);
+        });
     }
     session->sessionsCompleted++;
     goto start;
 
 }
-void pomodoro::pauseSession() {
-    pauseflag=!pauseflag;
-}
 
+void pomodoro::pauseSession() {
+    this->pauseflag= !pauseflag;
+}
+void pomodoro::cancelSession(wxStaticText* text,wxGauge* gauge){
+    wxGetApp().CallAfter([text,gauge]() {
+        text->SetLabelText("Press start to initiate a session");
+        gauge->SetValue(0);
+    });
+}
 void pomodoro::getStatistics() {
-    wxLogStatus(wxString::Format("Total Sessions: %d || Total Minutes: %d",this->sessionsCompleted,this->totalWorkTime/60));
+    return;
 }
