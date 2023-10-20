@@ -14,7 +14,7 @@ class mainFrame : public wxFrame {
 public:
     mainFrame(const wxString& title); //declare constructor that takes a wxstring by reference for the title of the frame
 private:
-    wxStaticText *Timer;
+    wxStaticText *timer;
     wxSpinCtrl* timeselect;
     wxSpinCtrl* breakselect;
     wxGauge* gauge;
@@ -24,8 +24,6 @@ private:
     wxPanel* panel;
     wxButton* statButton;
     wxButton* cancelButton;
-    bool processing=false;
-    std::thread backgroundThread;
     void onStartButtonClick(wxCommandEvent& evt);
     void onPauseButtonClick(wxCommandEvent& evt);
     void onStatButtonClick(wxCommandEvent& evt);

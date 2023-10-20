@@ -5,7 +5,6 @@
 #include "myApp.h"
 #include "mainFrame.h"
 #include <wx/wx.h>
-#include "pomodoro.h"
 
 //defining onInit method, it is the entry point of my application
 

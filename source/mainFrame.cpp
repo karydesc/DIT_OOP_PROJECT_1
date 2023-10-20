@@ -6,10 +6,9 @@
 #include <wx/wx.h>
 #include <wx/spinctrl.h>
 #include "pomodoro.h"
-#include <iostream>
-#include <unistd.h>
 #include <wx/string.h>
 #include "myApp.h"
+#include <mutex>
 
 DECLARE_APP(myApp)
 using namespace std;
@@ -53,7 +52,7 @@ mainFrame::mainFrame(const wxString& title) : wxFrame(nullptr,wxID_ANY,title) { 
 
     wxStaticText *header = new wxStaticText(headerpanel, wxID_ANY, "Pomodoro GUI", wxPoint(50, 10),wxSize(200, 30)); //creating simple header
 
-    Timer = new wxStaticText(headerpanel, wxID_ANY, "Press start to initiate a session", wxPoint(160, 150), wxSize(200,30)); //Creating a text field were the running time will be displayed
+    timer = new wxStaticText(headerpanel, wxID_ANY, "Press start to initiate a session", wxPoint(160, 150), wxSize(200,30)); //Creating a text field were the running time will be displayed
 
     statButton = new wxButton(panel,statButtonID,"Get Statistics", wxPoint(500, 255), wxSize(100, 35));
 
@@ -71,46 +70,52 @@ mainFrame::mainFrame(const wxString& title) : wxFrame(nullptr,wxID_ANY,title) { 
 pomodoro* session = new pomodoro;
 
 void mainFrame::onStartButtonClick(wxCommandEvent &evt) {
+    cout<<session->pauseflag;
 
-    if (!this->processing) {
+    if (!session->processing) {
 
-        if (this->backgroundThread.joinable())//reset thread if it's still running
+        if (session->backgroundThread.joinable())//reset thread if it's still running
         {
-            this->backgroundThread.join();
+            session->backgroundThread.join();
         }
-        this->processing = true; //setting flags
+        session->processing = true; //setting flags
 
         const auto f = [this]() {
-            session->startSession(timeselect->GetValue(), breakselect->GetValue(), Timer, gauge, session);
+            session->startSession(timeselect->GetValue(), breakselect->GetValue(), timer, gauge, session);
             wxGetApp().CallAfter([this]() {
-                this->processing = false;
+                session->processing = false;
             });
         };
-        this->backgroundThread = std::thread{f};
+        session->backgroundThread = std::thread{f};
     }
 }
 
 
 void mainFrame::onPauseButtonClick(wxCommandEvent &evt) {
-  session->pauseSession();
+    session->pauseSession();
 }
 
 void mainFrame::onStatButtonClick(wxCommandEvent &evt) {
     session->getStatistics();
 }
 void mainFrame::onCancelButtonClick(wxCommandEvent &evt) {
-    session->cancelSession(this->Timer,this->gauge);
+    session->cancelSession(this->timer,this->gauge);
 }
 
 
 void mainFrame::OnClose(wxCloseEvent&e){
-    if (this->processing)
+    session->quitRequested=true;
+
+    if(session->processing)
     {
-        e.Veto(false);
-        this->Destroy();
+        if(session->backgroundThread.joinable()){ //check if thread is running
+            session->quitRequested=true; //set quit flag to stop the timer in pomodoro.cpp
+            session->backgroundThread.join(); // join with main thread
+            this->Destroy(); //destroy window instance
+        }
     }
     else
     {
-        this->Destroy();
+        this->Destroy(); //if the timer isnt running destroy the window instance immediately
     }
 }
