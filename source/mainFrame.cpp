@@ -70,7 +70,6 @@ mainFrame::mainFrame(const wxString& title) : wxFrame(nullptr,wxID_ANY,title) { 
 pomodoro* session = new pomodoro;
 
 void mainFrame::onStartButtonClick(wxCommandEvent &evt) {
-    cout<<session->pauseflag;
 
     if (!session->processing) {
 

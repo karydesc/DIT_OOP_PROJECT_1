@@ -21,31 +21,32 @@ wxDECLARE_APP(myApp);
 void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,wxGauge* gauge,pomodoro* session) {
     session->processing =true;
     pauseflag=false;
-    std::mutex mtx;
-    std::condition_variable pauseCondition;  // Condition variable for signaling
-    std::unique_lock<std::mutex> lock(mtx);
+    cancelFlag=false;
+
     while(true){
     secondspassed = 0;
     seconds = workminutes * 60;
     for (int i = seconds; i >= 0; i--) {
         if (quitRequested) return; //handling window close
 
-        pauseCondition.wait(lock, [&]() { return !session->pauseflag; });
 
         if (this->cancelFlag) {
             cancelSession(text, gauge);
             return;
 
         }
-        sleep(1);
-        secondspassed++;
-        session->totalWorkTime++;
+        if (pauseflag) i++;
+        else{
+            secondspassed++; session->totalWorkTime++;
+
+        }
+
         wxGetApp().CallAfter([this, i, text, gauge]() {
             text->SetLabelText(wxString::Format("Focus: %d:%02d", i / 60, i % 60)); //updating the timer
             gauge->SetRange(seconds); //variable gauge range
             gauge->SetValue(secondspassed);
         });
-
+        sleep(1);
 
     }
     secondspassed = 0;
@@ -54,10 +55,10 @@ void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,
 
         if (quitRequested) return;
             // Wait until the flag changes (unpaused)
-            pauseCondition.wait(lock, [&]() { return !this->pauseflag; });
 
-        sleep(1);
-        secondspassed++;
+        if (pauseflag) i++;
+        else secondspassed++; session->totalWorkTime++;
+
         session->totalWorkTime++;
         if (this->cancelFlag) {
             return;
@@ -69,10 +70,12 @@ void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,
             gauge->SetRange(seconds); //variable gauge range
             gauge->SetValue(secondspassed);
         });
+        sleep(1);
+
     }
     session->sessionsCompleted++;
 }
-
+//restart pomodoro infinitely
 }
 
 void pomodoro::pauseSession() {
@@ -83,7 +86,6 @@ void pomodoro::cancelSession(wxStaticText* text,wxGauge* gauge){
         text->SetLabelText("Press start to initiate a session");
         gauge->SetValue(0);
         this->cancelFlag=true;
-        this->processing=false;
     });
 }
 void pomodoro::getStatistics() {

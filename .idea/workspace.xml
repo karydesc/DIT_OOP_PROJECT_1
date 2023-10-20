@@ -24,13 +24,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DIT_OOP_PROJECT_1.dir/source/pomodoro.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DIT_OOP_PROJECT_1.dir/source/pomodoro.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/DIT_OOP_PROJECT_1" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/DIT_OOP_PROJECT_1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/mainFrame.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/mainFrame.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/mainFrame.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/mainFrame.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/myApp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/myApp.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/source/pomodoro.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/pomodoro.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/pomodoro.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/pomodoro.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +111,7 @@
       <workItem from="1697581589251" duration="241000" />
       <workItem from="1697624611168" duration="2978000" />
       <workItem from="1697793229471" duration="10000" />
-      <workItem from="1697796218042" duration="2257000" />
+      <workItem from="1697796218042" duration="4088000" />
     </task>
     <task id="LOCAL-00001" summary="Experimenting with different UI elements as I'm leaning to use wxWidgets.">
       <option name="closed" value="true" />
