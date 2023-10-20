@@ -26,52 +26,44 @@ void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,
     while(true){
     secondspassed = 0;
     seconds = workminutes * 60;
-    for (int i = seconds; i >= 0; i--) {
-        if (quitRequested) return; //handling window close
+    for (int i = seconds; i >= 0;) {
+        if (this->cancelFlag) return;
 
+        if(!this->pauseflag){
+            if (quitRequested) return; //handling window close/end thread
 
-        if (this->cancelFlag) {
-            cancelSession(text, gauge);
-            return;
-
+            wxGetApp().CallAfter([this, i, text, gauge]() {
+                text->SetLabelText(wxString::Format("Focus: %d:%02d", i / 60, i % 60)); //updating the timer
+                gauge->SetRange(seconds); //variable gauge range
+                gauge->SetValue(secondspassed);
+            });
+            i--;
+            sleep(1);
         }
-        if (pauseflag) i++;
-        else{
-            secondspassed++; session->totalWorkTime++;
-
-        }
-
-        wxGetApp().CallAfter([this, i, text, gauge]() {
-            text->SetLabelText(wxString::Format("Focus: %d:%02d", i / 60, i % 60)); //updating the timer
-            gauge->SetRange(seconds); //variable gauge range
-            gauge->SetValue(secondspassed);
-        });
-        sleep(1);
 
     }
     secondspassed = 0;
     seconds = breakminutes * 60;
-    for (int i = seconds; i >= 0; i--) {
-
-        if (quitRequested) return;
+    for (int i = seconds; i >= 0;) {
+        if (this->cancelFlag) return;
+        if(!this->pauseflag){
+            if (quitRequested) return;
             // Wait until the flag changes (unpaused)
 
-        if (pauseflag) i++;
-        else secondspassed++; session->totalWorkTime++;
 
-        session->totalWorkTime++;
-        if (this->cancelFlag) {
-            return;
 
+            session->totalWorkTime++;
+
+
+
+            wxGetApp().CallAfter([this, i, text, gauge]() {
+                text->SetLabelText(wxString::Format("Break: %d:%02d", i / 60, i % 60)); //updating the timer
+                gauge->SetRange(seconds); //variable gauge range
+                gauge->SetValue(secondspassed);
+            });
+            i--;
+            sleep(1);
         }
-
-        wxGetApp().CallAfter([this, i, text, gauge]() {
-            text->SetLabelText(wxString::Format("Break: %d:%02d", i / 60, i % 60)); //updating the timer
-            gauge->SetRange(seconds); //variable gauge range
-            gauge->SetValue(secondspassed);
-        });
-        sleep(1);
-
     }
     session->sessionsCompleted++;
 }
@@ -81,11 +73,10 @@ void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,
 void pomodoro::pauseSession() {
     this->pauseflag= !pauseflag;
 }
-void pomodoro::cancelSession(wxStaticText* text,wxGauge* gauge){
+void pomodoro::resetScreen(wxStaticText* text, wxGauge* gauge){
     wxGetApp().CallAfter([text,gauge,this]() {
         text->SetLabelText("Press start to initiate a session");
         gauge->SetValue(0);
-        this->cancelFlag=true;
     });
 }
 void pomodoro::getStatistics() {

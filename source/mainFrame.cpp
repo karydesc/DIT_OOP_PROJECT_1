@@ -98,7 +98,9 @@ void mainFrame::onStatButtonClick(wxCommandEvent &evt) {
     session->getStatistics();
 }
 void mainFrame::onCancelButtonClick(wxCommandEvent &evt) {
-    session->cancelSession(this->timer,this->gauge);
+    session->cancelFlag=true;
+    session->processing=false;
+    session->resetScreen(this->timer, this->gauge);
 }
 
 

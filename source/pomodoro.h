@@ -12,12 +12,12 @@ public:
      void startSession(int,int,wxStaticText*,wxGauge*,pomodoro*);
      void pauseSession();
      void getStatistics();
-     void cancelSession(wxStaticText*,wxGauge*);
+     void resetScreen(wxStaticText *text, wxGauge *gauge);
      bool quitRequested=false;
      bool processing=false;
      std::thread backgroundThread;
      bool pauseflag=false;
-    bool cancelFlag=false;
+     bool cancelFlag=false;
 
 
 
