@@ -8,9 +8,7 @@
 #include "pomodoro.h"
 #include <wx/string.h>
 #include "myApp.h"
-#include <mutex>
 #include <wx/sound.h>
-#include <wx/notifmsg.h>
 DECLARE_APP(myApp)
 using namespace std;
 
