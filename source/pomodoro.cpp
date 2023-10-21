@@ -10,6 +10,7 @@
 #include <wx/string.h>
 #include <ctime>
 #include "myApp.h"
+#include <wx/sound.h>
 
 
 
@@ -22,6 +23,7 @@ void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,
     pauseflag=false;
     cancelFlag=false;
 
+//restart pomodoro indefinitely
     while(true){
     secondspassed = 0;
     seconds = workminutes * 60;
@@ -58,8 +60,8 @@ void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,
         sleep(1);
     }
     session->sessionsCompleted++;
+    wxSound::Play("./resources/SessionComplete.mp3");
 }
-//restart pomodoro infinitely
 }
 
 void pomodoro::pauseSession() {

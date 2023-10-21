@@ -1,8 +1,2 @@
-Sat Oct 21 17:59:03 2023
-    Number of sessions:0  Number of minutes worked: 1
-Sat Oct 21 17:59:50 2023
-    Number of sessions:0  Number of minutes worked: 1
-Sat Oct 21 19:24:32 2023
-    Number of sessions:0  Number of minutes worked: 0
-Sat Oct 21 19:29:14 2023
-    Number of sessions:0  Number of minutes worked: 4
+Sun Oct 22 00:26:34 2023
+    Number of sessions:2  Number of minutes worked: 2
