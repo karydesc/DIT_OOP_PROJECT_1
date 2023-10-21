@@ -20,17 +20,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ccf296e-503f-4fdf-936c-b55e36e42455" name="Changes" comment="Project is almost complete. Implemented a working session manager, cancel pause and start buttons, ability to see statistics. and many others">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DIT_OOP_PROJECT_1.dir/source/mainFrame.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DIT_OOP_PROJECT_1.dir/source/mainFrame.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DIT_OOP_PROJECT_1.dir/source/pomodoro.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DIT_OOP_PROJECT_1.dir/source/pomodoro.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/DIT_OOP_PROJECT_1" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/DIT_OOP_PROJECT_1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/mainFrame.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/mainFrame.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/pomodoro.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/source/pomodoro.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/pomodoro.h" beforeDir="false" afterPath="$PROJECT_DIR$/source/pomodoro.h" afterDir="false" />
-    </list>
+    <list default="true" id="2ccf296e-503f-4fdf-936c-b55e36e42455" name="Changes" comment="Project is almost complete. Implemented a working session manager, cancel pause and start buttons, ability to see statistics. and many others" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -89,6 +79,11 @@
   </component>
   <component name="RunManager">
     <configuration name="DIT_OOP_PROJECT_1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="DIT_OOP_PROJECT_1" TARGET_NAME="DIT_OOP_PROJECT_1" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="DIT_OOP_PROJECT_1" RUN_TARGET_NAME="DIT_OOP_PROJECT_1">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>

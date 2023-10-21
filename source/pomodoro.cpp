@@ -9,13 +9,11 @@
 #include <wx/string.h>
 #include <thread>
 #include "myApp.h"
-#include <mutex>
-#include <condition_variable>
+
 
 
 using namespace std;
 int seconds;
-int j=0;
 int secondspassed;
 wxDECLARE_APP(myApp);
 void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,wxGauge* gauge,pomodoro* session) {
@@ -28,29 +26,26 @@ void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,
     seconds = workminutes * 60;
     for (int i = seconds; i >= 0;) {
         if (this->cancelFlag) return;
-
+        if (quitRequested) return; //handling window close/end thread
         if(!this->pauseflag){
-            if (quitRequested) return; //handling window close/end thread
 
+            session->totalWorkTime++;
             wxGetApp().CallAfter([this, i, text, gauge]() {
                 text->SetLabelText(wxString::Format("Focus: %d:%02d", i / 60, i % 60)); //updating the timer
                 gauge->SetRange(seconds); //variable gauge range
                 gauge->SetValue(secondspassed);
             });
             i--;
-            sleep(1);
-        }
 
+        }
+        sleep(1);
     }
     secondspassed = 0;
     seconds = breakminutes * 60;
     for (int i = seconds; i >= 0;) {
         if (this->cancelFlag) return;
+        if (quitRequested) return;
         if(!this->pauseflag){
-            if (quitRequested) return;
-            // Wait until the flag changes (unpaused)
-
-
 
             session->totalWorkTime++;
 
@@ -62,8 +57,9 @@ void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,
                 gauge->SetValue(secondspassed);
             });
             i--;
-            sleep(1);
+
         }
+        sleep(1);
     }
     session->sessionsCompleted++;
 }
