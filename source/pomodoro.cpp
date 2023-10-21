@@ -4,10 +4,11 @@
 
 #include "pomodoro.h"
 #include <iostream>
+#include <fstream>
 #include <wx/wx.h>
 #include <unistd.h>
 #include <wx/string.h>
-#include <thread>
+#include <ctime>
 #include "myApp.h"
 
 
@@ -29,7 +30,7 @@ void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,
         if (quitRequested) return; //handling window close/end thread
         if(!this->pauseflag){
 
-            session->totalWorkTime++;
+            session->WorkSeconds++;
             wxGetApp().CallAfter([this, i, text, gauge]() {
                 text->SetLabelText(wxString::Format("Focus: %d:%02d", i / 60, i % 60)); //updating the timer
                 gauge->SetRange(seconds); //variable gauge range
@@ -46,11 +47,6 @@ void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,
         if (this->cancelFlag) return;
         if (quitRequested) return;
         if(!this->pauseflag){
-
-            session->totalWorkTime++;
-
-
-
             wxGetApp().CallAfter([this, i, text, gauge]() {
                 text->SetLabelText(wxString::Format("Break: %d:%02d", i / 60, i % 60)); //updating the timer
                 gauge->SetRange(seconds); //variable gauge range
@@ -75,6 +71,10 @@ void pomodoro::resetScreen(wxStaticText* text, wxGauge* gauge){
         gauge->SetValue(0);
     });
 }
-void pomodoro::getStatistics() {
-    return;
+void pomodoro::logStatistics() {
+    time_t now = time(nullptr);
+    char* data_time = ctime(&now);
+    ofstream myFile("logs.txt",ios::app);
+    myFile << data_time << "    Number of sessions:" << sessionsCompleted << "  Number of minutes worked: " << WorkSeconds/60 << endl;
+    myFile.close();
 }

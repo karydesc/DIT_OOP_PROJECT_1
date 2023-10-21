@@ -23,12 +23,14 @@ private:
     wxPanel* headerpanel;
     wxPanel* panel;
     wxButton* statButton;
+    wxButton* showstat;
     wxButton* cancelButton;
     void onStartButtonClick(wxCommandEvent& evt);
     void onPauseButtonClick(wxCommandEvent& evt);
     void onStatButtonClick(wxCommandEvent& evt);
     void onCancelButtonClick(wxCommandEvent& evt);
     void OnClose(wxCloseEvent &e);
+    void onShowStatsClick(wxCommandEvent& evt);
     wxDECLARE_EVENT_TABLE();
 };
 

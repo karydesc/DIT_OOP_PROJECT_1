@@ -5,9 +5,9 @@
 #include "myApp.h"
 #include "mainFrame.h"
 #include <wx/wx.h>
-
+#include <iostream>
 //defining onInit method, it is the entry point of my application
-
+using namespace std;
 bool myApp::OnInit(){
     mainFrame* MainFrame = new mainFrame("DIT-OOP-PROJECT_1-2708");//New instance of mainframe with title argument
     MainFrame->Show(true);//calling show method of the object as it is hidden by default

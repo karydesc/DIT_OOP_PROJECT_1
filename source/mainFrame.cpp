@@ -9,6 +9,7 @@
 #include <wx/string.h>
 #include "myApp.h"
 #include <mutex>
+#include <wx/popupwin.h>
 
 DECLARE_APP(myApp)
 using namespace std;
@@ -17,13 +18,15 @@ enum IDs{
     startButtonID=2,
     pauseButtonID=3,
     statButtonID=4,
-    cancelButtonID=5
+    cancelButtonID=5,
+    showstatID=6
 };
 wxBEGIN_EVENT_TABLE(mainFrame,wxFrame)
                 EVT_BUTTON(startButtonID,mainFrame::onStartButtonClick)
                 EVT_BUTTON(pauseButtonID,mainFrame::onPauseButtonClick)
                 EVT_BUTTON(statButtonID,mainFrame::onStatButtonClick)
                 EVT_BUTTON(cancelButtonID,mainFrame::onCancelButtonClick)
+                EVT_BUTTON(showstatID,mainFrame::onShowStatsClick)
 
 wxEND_EVENT_TABLE();
 
@@ -54,22 +57,19 @@ mainFrame::mainFrame(const wxString& title) : wxFrame(nullptr,wxID_ANY,title) { 
 
     timer = new wxStaticText(headerpanel, wxID_ANY, "Press start to initiate a session", wxPoint(160, 150), wxSize(200,30)); //Creating a text field were the running time will be displayed
 
-    statButton = new wxButton(panel,statButtonID,"Get Statistics", wxPoint(500, 255), wxSize(100, 35));
+    statButton = new wxButton(panel,statButtonID,"Log Statistics", wxPoint(500, 255), wxSize(100, 35));
 
     cancelButton = new wxButton(panel,cancelButtonID,"Cancel", wxPoint(35, 285), wxSize(100, 35));
 
+    showstat = new wxButton(panel,showstatID,"Open Logs file",wxPoint(500,285),wxSize(100,30));
+
     this->Bind(wxEVT_CLOSE_WINDOW, &mainFrame::OnClose, this);
 
-
-
-
-
-
-    CreateStatusBar();
 }
 pomodoro* session = new pomodoro;
 
 void mainFrame::onStartButtonClick(wxCommandEvent &evt) {
+
 
     if (!session->processing) {
 
@@ -95,7 +95,7 @@ void mainFrame::onPauseButtonClick(wxCommandEvent &evt) {
 }
 
 void mainFrame::onStatButtonClick(wxCommandEvent &evt) {
-    session->getStatistics();
+    session->logStatistics();
 }
 void mainFrame::onCancelButtonClick(wxCommandEvent &evt) {
     session->cancelFlag=true;
@@ -119,4 +119,8 @@ void mainFrame::OnClose(wxCloseEvent&e){
     {
         this->Destroy(); //if the timer isnt running destroy the window instance immediately
     }
+}
+
+void mainFrame::onShowStatsClick(wxCommandEvent &evt) {
+    system("open ./logs.txt");
 }

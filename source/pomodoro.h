@@ -11,7 +11,7 @@ class pomodoro {
 public:
      void startSession(int,int,wxStaticText*,wxGauge*,pomodoro*);
      void pauseSession();
-     void getStatistics();
+     void logStatistics();
      void resetScreen(wxStaticText *text, wxGauge *gauge);
      bool quitRequested=false;
      bool processing=false;
@@ -23,7 +23,7 @@ public:
 
 
 private:
-int totalWorkTime;
+int WorkSeconds;
 int sessionsCompleted;
 };
 
