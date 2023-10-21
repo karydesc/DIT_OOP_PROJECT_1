@@ -9,8 +9,8 @@
 #include <wx/string.h>
 #include "myApp.h"
 #include <mutex>
-#include <wx/popupwin.h>
-
+#include <wx/sound.h>
+#include <wx/notifmsg.h>
 DECLARE_APP(myApp)
 using namespace std;
 
@@ -69,8 +69,7 @@ mainFrame::mainFrame(const wxString& title) : wxFrame(nullptr,wxID_ANY,title) { 
 pomodoro* session = new pomodoro;
 
 void mainFrame::onStartButtonClick(wxCommandEvent &evt) {
-
-
+    wxSound::Play("./resources/Confirm.wav");
     if (!session->processing) {
 
         if (session->backgroundThread.joinable())//reset thread if it's still running
@@ -98,6 +97,7 @@ void mainFrame::onStatButtonClick(wxCommandEvent &evt) {
     session->logStatistics();
 }
 void mainFrame::onCancelButtonClick(wxCommandEvent &evt) {
+    wxSound::Play("./resources/Cancel.wav");
     session->cancelFlag=true;
     session->processing=false;
     session->resetScreen(this->timer, this->gauge);
