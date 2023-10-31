@@ -1,0 +1,8 @@
+Tue Oct 31 14:26:00 2023
+ USER: chris   Number of sessions:0  Number of minutes worked: 0
+Tue Oct 31 14:27:42 2023
+ USER: chris   Number of sessions:0  Number of minutes worked: 1
+Tue Oct 31 14:30:07 2023
+ USER: chris   Number of sessions:0  Number of minutes worked: 2
+Tue Oct 31 14:34:02 2023
+ USER: chris   Number of sessions:0  Number of minutes worked: 2

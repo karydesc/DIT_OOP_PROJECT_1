@@ -18,13 +18,8 @@ public:
      std::thread backgroundThread;
      bool pauseflag=false;
      bool cancelFlag=false;
-
-
-
-
-private:
-int WorkSeconds;
-int sessionsCompleted;
+     int WorkSeconds;
+     int sessionsCompleted;
 };
 
 

@@ -74,10 +74,3 @@ void pomodoro::resetScreen(wxStaticText* text, wxGauge* gauge){
         gauge->SetValue(0);
     });
 }
-void pomodoro::logStatistics() {
-    time_t now = time(nullptr); //getting current time and printing it on a txt file along with statistics
-    char* data_time = ctime(&now);
-    ofstream myFile("logs.txt",ios::app);
-    myFile << data_time << "    Number of sessions:" << sessionsCompleted << "  Number of minutes worked: " << WorkSeconds/60 << endl;
-    myFile.close();
-}

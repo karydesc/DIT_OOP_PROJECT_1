@@ -7,7 +7,8 @@
 #include <wx/wx.h>
 #include <wx/spinctrl.h>
 #include <thread>
-
+#include <string>
+#include "database.h"
 
 //declare mainframe class, inherit from wxFrame
 class mainFrame : public wxFrame {

@@ -9,6 +9,9 @@ add_executable(DIT_OOP_PROJECT_1
         source/pomodoro.cpp
         source/mainFrame.cpp
         source/myApp.cpp
+        source/sqlite3.c
+        source/database.cpp
+        source/database.h
 )
 find_package(wxWidgets REQUIRED gl core base OPTIONAL_COMPONENTS net gui)
 include(${wxWidgets_USE_FILE})

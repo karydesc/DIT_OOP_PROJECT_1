@@ -9,6 +9,7 @@
 #include <wx/string.h>
 #include "myApp.h"
 #include <wx/sound.h>
+#include "database.h"
 DECLARE_APP(myApp)
 using namespace std;
 
@@ -92,11 +93,14 @@ void mainFrame::onPauseButtonClick(wxCommandEvent &evt) {
 }
 
 void mainFrame::onStatButtonClick(wxCommandEvent &evt) {
-    session->logStatistics();
+    wxGetApp().GetDatabase()->storeStats(wxGetApp().getUser(),session->WorkSeconds/60,session->sessionsCompleted); //all database operations are called through the myApp class,
+    //because the initial instance of the database is started in the onInit() function and i couldnt not make it be accessible to the rest of the classes in any other way.
+
+
 }
 void mainFrame::onCancelButtonClick(wxCommandEvent &evt) {
-    wxSound::Play("./resources/Cancel.wav");
-    session->cancelFlag=true;
+    wxSound::Play("./resources/Cancel.wav"); //play sound
+    session->cancelFlag=true; //set flags
     session->processing=false;
     session->resetScreen(this->timer, this->gauge);
 }
@@ -104,7 +108,7 @@ void mainFrame::onCancelButtonClick(wxCommandEvent &evt) {
 
 void mainFrame::OnClose(wxCloseEvent&e){
     session->quitRequested=true;
-
+    wxGetApp().GetDatabase()->close();
     if(session->processing)
     {
         if(session->backgroundThread.joinable()){ //check if thread is running
@@ -115,8 +119,9 @@ void mainFrame::OnClose(wxCloseEvent&e){
     }
     else
     {
-        this->Destroy(); //if the timer isnt running destroy the window instance immediately
+        this->Destroy(); //if the timer isn't running destroy the window instance immediately
     }
+
 }
 
 void mainFrame::onShowStatsClick(wxCommandEvent &evt) {
