@@ -11,15 +11,18 @@ class pomodoro {
 public:
      void startSession(int,int,wxStaticText*,wxGauge*,pomodoro*);
      void pauseSession();
-     void logStatistics();
      void resetScreen(wxStaticText *text, wxGauge *gauge);
      bool quitRequested=false;
      bool processing=false;
      std::thread backgroundThread;
      bool pauseflag=false;
      bool cancelFlag=false;
-     int WorkSeconds;
-     int sessionsCompleted;
+    int lastCurrentSessionMinutes=0;
+    int lastCurrentSessionCount=0;
+    int WorkSeconds;
+    int sessionsCompleted;
+private:
+
 };
 
 

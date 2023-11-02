@@ -10,30 +10,37 @@
 //defining onInit method, it is the entry point of my application
 using namespace std;
 bool myApp::OnInit(){
-    myDB = new database();
-    char choice;
-    string pass;
+    myDB = new database(); //create a new database object
+    char choice; //var to store choice
+    string pass; //very insecure way of storing passwords but no security is truly needed for this program
     cout<<"1: Add User"<<endl<<"2: Login"<<endl<<"Input: ";
     cin>>choice;
-    if (choice=='1'){
-        system("clear");
-        cout<<"Input username and then a password: ";
-        cin>>user;
-        cin>>pass;
-        myDB->addUser(user,pass);
-    } else if (choice=='2'){
-        cout<<"Input username and then a password: ";
-        cin>>user;
-        cin>>pass;
-        if (!myDB->authUser(user,pass)){
+    switch (choice){
+        case '1':
+            system("clear");
+            cout<<"Input username and then a password: ";
+            cin>>user;
+            cin>>pass;
+            myDB->addUser(user,pass);
+            break;
+        case '2':
+            cout<<"Input username and then a password: ";
+            cin>>user;
+            cin>>pass;
+             if (!myDB->authUser(user,pass)){
+                cout<<"Aborting...";
+                return false;
+              }  else cout<<endl<<"Started GUI...";
+             break;
+        default:
+            cout<< "Invalid input";
             return false;
-       }
-   }else return false;
+    }
     mainFrame* MainFrame = new mainFrame("DIT-OOP-PROJECT_1-2708");//New instance of mainframe with title argument
     MainFrame->Show(true);//calling show method of the object as it is hidden by default
     MainFrame->SetClientSize(650,350);
 
     return true; //returning true tells wxwidgets that the program can resume
 }
-//have to tell wxwidgets which class represents my application, so I call this following method
+//have to tell wxwidgets which class represents my application, so I call this following macro/method
 wxIMPLEMENT_APP(myApp);

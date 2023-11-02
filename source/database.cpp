@@ -80,7 +80,7 @@ bool database::authUser(const string & user, const std::string & pass) {
 
 }
 
-void database::storeStats(const string& user, int workseconds, int sessionsCompleted) {
+void database::storeStats(const string& user,pomodoro* session) {
     stringstream query; //create a query variable
     query << "SELECT workmins, sessionsCompleted FROM database WHERE user= '" << user << "';"; //build the query
     rc = sqlite3_prepare_v2(db, query.str().c_str(), -1, &stmt, 0); //prepare statement
@@ -101,7 +101,7 @@ void database::storeStats(const string& user, int workseconds, int sessionsCompl
         cout << "Previous workmins: " << prevWM << endl; //print old values from database
         cout << "Previous sessions completed: " << prevSC << endl;
 
-        sqlite3_reset(stmt); // Reset the statement for reuse
+        sqlite3_finalize(stmt); // Reset the statement for reuse
         query.str("");       // Clear the stringstream
 
         query << "UPDATE database SET workmins = ?, sessionsCompleted = ? WHERE user= '" << user << "';";
@@ -113,8 +113,11 @@ void database::storeStats(const string& user, int workseconds, int sessionsCompl
             return;
         }
 
-        sqlite3_bind_int(stmt, 1, prevWM + workseconds % 60); //bind (previous seconds + current seconds) for execution
-        sqlite3_bind_int(stmt, 2, prevSC + sessionsCompleted);
+        sqlite3_bind_int(stmt, 1, prevWM + (session->WorkSeconds/60 - session-> lastCurrentSessionMinutes)); //bind for execution
+        cout<<"\nprevious: "<<prevWM<<"\nsession workseconds /60 ="<<session->WorkSeconds/60<<"\nlast current session minutes  "<< session->lastCurrentSessionMinutes<<"\nwrote to database: "<<prevWM + (session->WorkSeconds / 60 - session-> lastCurrentSessionMinutes)<<endl;
+        sqlite3_bind_int(stmt, 2, prevSC + (session->sessionsCompleted- session-> lastCurrentSessionCount));//I remove from the result the time and session count of the
+        session-> lastCurrentSessionMinutes=session->WorkSeconds / 60 ;// already existing instance to prevent for example: pressing log multiple times
+        session->lastCurrentSessionCount=session->sessionsCompleted;//and adding the same minutes worked over and over again
         rc = sqlite3_step(stmt); //exectute statement
 
         if (rc != SQLITE_DONE) { //handle error
@@ -129,8 +132,10 @@ void database::storeStats(const string& user, int workseconds, int sessionsCompl
 
     time_t now = time(nullptr); //getting current time and printing it on a txt file along with statistics
     char* data_time = ctime(&now);
-    ofstream myFile("logs.txt",ios::app);
-    myFile << data_time << " USER: " << wxGetApp().getUser() << "   Number of sessions:" << sessionsCompleted+prevSC << "  Number of minutes worked: " << prevWM+workseconds % 60 << endl;
+    string filename = "./data/"+user+".txt"; //create a file for each user that will store the statistics for viewing.
+
+    ofstream myFile(filename,ios::trunc);
+    myFile << "Last Update: "<< data_time << " USER: " << wxGetApp().getUser() << "   Number of sessions:" <<session->sessionsCompleted- session-> lastCurrentSessionCount << "  Number of minutes worked: " << prevWM + (session->WorkSeconds/60 - session-> lastCurrentSessionMinutes) << endl;
     myFile.close(); //write to file, username is a member of the myApp class, so it can be accessed globally.
 
 }

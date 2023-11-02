@@ -13,8 +13,9 @@ class myApp : public wxApp{ //inheriting from wxApp class
         virtual bool OnInit();
         database* GetDatabase() const { return myDB; }
         string getUser() const {return user;}
-        string user;
+
     private:
+        string user;
         database* myDB;
 };
 

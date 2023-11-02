@@ -6,6 +6,7 @@
 #define DIT_OOP_PROJECT_1_DATABASE_H
 #include <string>
 #include "sqlite3.h"
+#include "pomodoro.h"
 using namespace std;
 class database {
 public:
@@ -13,7 +14,7 @@ public:
     database();
     bool authUser(const string&,const string&);
     void close();
-    void storeStats(const string&, int workseconds, int sessionsCompleted);
+    void storeStats(const string&,pomodoro*);
 private:
     sqlite3* db;
     int rc;

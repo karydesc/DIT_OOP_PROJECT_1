@@ -93,7 +93,7 @@ void mainFrame::onPauseButtonClick(wxCommandEvent &evt) {
 }
 
 void mainFrame::onStatButtonClick(wxCommandEvent &evt) {
-    wxGetApp().GetDatabase()->storeStats(wxGetApp().getUser(),session->WorkSeconds/60,session->sessionsCompleted); //all database operations are called through the myApp class,
+    wxGetApp().GetDatabase()->storeStats(wxGetApp().getUser(),session); //all database operations are called through the myApp class,
     //because the initial instance of the database is started in the onInit() function and i couldnt not make it be accessible to the rest of the classes in any other way.
 
 
@@ -125,5 +125,6 @@ void mainFrame::OnClose(wxCloseEvent&e){
 }
 
 void mainFrame::onShowStatsClick(wxCommandEvent &evt) {
-    system("open ./logs.txt");
+    string shell="open ./data/"+wxGetApp().getUser()+".txt";
+    system(shell.c_str());
 }
