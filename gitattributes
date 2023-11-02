@@ -1,1 +1,2 @@
-*.c linguist-vendored
+*source/sqlite.c linguist-vendored
+*source/sqlite.h linguist-vendored
