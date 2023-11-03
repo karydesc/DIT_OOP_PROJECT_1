@@ -20,7 +20,7 @@ public:
     int lastCurrentSessionMinutes=0;
     int lastCurrentSessionCount=0;
     int WorkSeconds;
-    int sessionsCompleted;
+    int sessionsCompleted=0;
 private:
 
 };

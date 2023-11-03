@@ -108,17 +108,20 @@ void mainFrame::onCancelButtonClick(wxCommandEvent &evt) {
 
 void mainFrame::OnClose(wxCloseEvent&e){
     session->quitRequested=true;
-    wxGetApp().GetDatabase()->close();
     if(session->processing)
     {
         if(session->backgroundThread.joinable()){ //check if thread is running
-            session->quitRequested=true; //set quit flag to stop the timer in pomodoro.cpp
             session->backgroundThread.join(); // join with main thread
+            delete wxGetApp().GetDatabase();
+            delete session;
+
             this->Destroy(); //destroy window instance
         }
     }
-    else
-    {
+    else{
+        wxGetApp().GetDatabase()->close();
+        delete wxGetApp().GetDatabase();
+        delete session;
         this->Destroy(); //if the timer isn't running destroy the window instance immediately
     }
 

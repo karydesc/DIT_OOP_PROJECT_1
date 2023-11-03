@@ -12,48 +12,50 @@
 #include <chrono>
 #include "myApp.h"
 #include <wx/sound.h>
+#include <catch2/catch_test_macros.hpp>
 
 
 using namespace std::chrono_literals;
 using namespace std;
-int secs;
-int secondspassed;
 wxDECLARE_APP(myApp);
 void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,wxGauge* gauge,pomodoro* session) {
     session->processing =true;
+    int secs;
     pauseflag=false;
     cancelFlag=false;
 
 //restart pomodoro indefinitely
     while(true){
-    secondspassed = 0;
         secs = workminutes * 60;
+        wxGetApp().CallAfter([gauge,secs](){
+            gauge->SetRange(secs);
+            cout<<gauge->GetValue()<<endl;
+            cout<<gauge->GetRange()<<endl;
+        });
     for (int i = secs; i >= 0;) {
         if (this->cancelFlag) return;
         if (quitRequested) return; //handling window close/end thread
         if (!this->pauseflag) {
-
             session->WorkSeconds++;
-            wxGetApp().CallAfter([this, i, text, gauge]() {
+            wxGetApp().CallAfter([i, text, gauge]() {
                 text->SetLabelText(wxString::Format("Focus: %d:%02d", i / 60, i % 60)); //updating the timer
-                gauge->SetRange(secs); //variable gauge range
-                gauge->SetValue(secondspassed);
+                gauge->SetValue(i);
             });
             i--;
-
         }
         std::this_thread::sleep_for(1s); //timer tick
     }
-    secondspassed = 0;
-        secs = breakminutes * 60;
+    secs = breakminutes * 60;
+    wxGetApp().CallAfter([gauge,secs](){
+            gauge->SetRange(secs);
+    });
     for (int i = secs; i >= 0;) {
         if (this->cancelFlag) return;
         if (quitRequested) return;
         if(!this->pauseflag){
-            wxGetApp().CallAfter([this, i, text, gauge]() {
+            wxGetApp().CallAfter([i, text, gauge]() {
                 text->SetLabelText(wxString::Format("Break: %d:%02d", i / 60, i % 60));
-                gauge->SetRange(secs);
-                gauge->SetValue(secondspassed);
+                gauge->SetValue(i);
             });
             i--;
 
@@ -69,7 +71,7 @@ void pomodoro::pauseSession() {
     this->pauseflag= !pauseflag;
 }
 void pomodoro::resetScreen(wxStaticText* text, wxGauge* gauge){
-    wxGetApp().CallAfter([text,gauge,this]() {
+    wxGetApp().CallAfter([text,gauge]() {
         text->SetLabelText("Press start to initiate a session");
         gauge->SetValue(0);
     });

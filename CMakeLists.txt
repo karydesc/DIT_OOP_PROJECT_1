@@ -4,7 +4,10 @@ project(DIT_OOP_PROJECT_1)
 
 set(CMAKE_CXX_STANDARD 17)
 
+# Add the Catch2 library
+find_package(Catch2 REQUIRED)
 
+# Add the source files to the executable
 add_executable(DIT_OOP_PROJECT_1
         source/pomodoro.cpp
         source/mainFrame.cpp
@@ -13,6 +16,11 @@ add_executable(DIT_OOP_PROJECT_1
         source/database.cpp
         source/database.h
 )
+
+# Include Catch2
+target_link_libraries(DIT_OOP_PROJECT_1 PRIVATE Catch2::Catch2)
+
+# Include wxWidgets
 find_package(wxWidgets REQUIRED gl core base OPTIONAL_COMPONENTS net gui)
 include(${wxWidgets_USE_FILE})
 target_link_libraries(DIT_OOP_PROJECT_1 PRIVATE ${wxWidgets_LIBRARIES})

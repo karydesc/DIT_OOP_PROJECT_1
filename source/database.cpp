@@ -63,7 +63,7 @@ bool database::authUser(const string & user, const std::string & pass) {
         const char* storedPass = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0)); //extract the password and cast it as a const char* for storing
         // Compare passwords
         if (pass == storedPass) { //handle cases
-            cout << "Authentication successful! User: " << user << endl;
+            cout << "Authentication successful! User: " << user;
             sqlite3_finalize(stmt);
             return true;
         } else {
@@ -114,8 +114,7 @@ void database::storeStats(const string& user,pomodoro* session) {
         }
 
         sqlite3_bind_int(stmt, 1, prevWM + (session->WorkSeconds/60 - session-> lastCurrentSessionMinutes)); //bind for execution
-        cout<<"\nprevious: "<<prevWM<<"\nsession workseconds /60 ="<<session->WorkSeconds/60<<"\nlast current session minutes  "<< session->lastCurrentSessionMinutes<<"\nwrote to database: "<<prevWM + (session->WorkSeconds / 60 - session-> lastCurrentSessionMinutes)<<endl;
-        sqlite3_bind_int(stmt, 2, prevSC + (session->sessionsCompleted- session-> lastCurrentSessionCount));//I remove from the result the time and session count of the
+        sqlite3_bind_int(stmt, 2, prevSC + (session->sessionsCompleted - session-> lastCurrentSessionCount));//I remove from the result the time and session count of the
         session-> lastCurrentSessionMinutes=session->WorkSeconds / 60 ;// already existing instance to prevent for example: pressing log multiple times
         session->lastCurrentSessionCount=session->sessionsCompleted;//and adding the same minutes worked over and over again
         rc = sqlite3_step(stmt); //exectute statement
@@ -135,7 +134,7 @@ void database::storeStats(const string& user,pomodoro* session) {
     string filename = "./data/"+user+".txt"; //create a file for each user that will store the statistics for viewing.
 
     ofstream myFile(filename,ios::trunc);
-    myFile << "Last Update: "<< data_time << " USER: " << wxGetApp().getUser() << "   Number of sessions:" <<session->sessionsCompleted- session-> lastCurrentSessionCount << "  Number of minutes worked: " << prevWM + (session->WorkSeconds/60 - session-> lastCurrentSessionMinutes) << endl;
+    myFile << "Last Update: "<< data_time << " USER: " << wxGetApp().getUser() << "   Number of sessions:" << prevSC + ((session->sessionsCompleted - session-> lastCurrentSessionCount)) << "  Number of minutes worked: " << prevWM + (session->WorkSeconds/60 - session-> lastCurrentSessionMinutes) << endl;
     myFile.close(); //write to file, username is a member of the myApp class, so it can be accessed globally.
 
 }
