@@ -1,0 +1,1 @@
+/usr/bin/c++  -pthread CMakeFiles/DIT_OOP_PROJECT_1.dir/source/pomodoro.cpp.o CMakeFiles/DIT_OOP_PROJECT_1.dir/source/mainFrame.cpp.o CMakeFiles/DIT_OOP_PROJECT_1.dir/source/myApp.cpp.o CMakeFiles/DIT_OOP_PROJECT_1.dir/source/database.cpp.o -o DIT_OOP_PROJECT_1  -L/usr/lib/x86_64-linux-gnu -pthread -lwx_gtk3u_gl-3.2 -lwx_gtk3u_core-3.2 -lwx_baseu-3.2 

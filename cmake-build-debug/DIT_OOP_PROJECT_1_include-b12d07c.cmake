@@ -1,5 +1,0 @@
-if(EXISTS "/Users/christoskarydis/Documents/Uni/Semester 3/OOP/DIT_OOP_PROJECT_1/cmake-build-debug/DIT_OOP_PROJECT_1_tests-b12d07c.cmake")
-  include("/Users/christoskarydis/Documents/Uni/Semester 3/OOP/DIT_OOP_PROJECT_1/cmake-build-debug/DIT_OOP_PROJECT_1_tests-b12d07c.cmake")
-else()
-  add_test(DIT_OOP_PROJECT_1_NOT_BUILT-b12d07c DIT_OOP_PROJECT_1_NOT_BUILT-b12d07c)
-endif()
