@@ -12,7 +12,7 @@ Prerequisites:<br><br>
  	-catch2 Library installed<br>
   	-sqlite3 Library installed<br>
   	-cmake - optional<br><br>
-On a Unix terminal:<br>
+On a Unix-like terminal:<br>
 	$ cd (ROOT_DIR)<br>
 	$ mkdir BUILD<br>
  	$ cd BUILD<br>
