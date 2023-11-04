@@ -7,7 +7,7 @@ Compile Instructions:<br>
 WARNING: The following instructions/codes have only been tested in a macOS/Linux environment <br>
 The code should theortetically work on Windows as well, however compile instructions cannot be provided.<br>
 Prerequisites:<br><br>
-	-A C++ compiler<br><
+	-A C++ compiler<br>
 	-wxWidgets Library installed<br>
  	-catch2 Library installed<br>
   	-sqlite3 Library installed<br>
