@@ -7,4 +7,6 @@ Compile Instructions:
 
 Prerequisites:
 	-A C++ compiler
-	-wxWidgets Library installed 
+	-wxWidgets Library installed
+ 	-catch2 library installed
+  	-cmake - optional
