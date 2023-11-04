@@ -5,7 +5,7 @@
 #ifndef DIT_OOP_PROJECT_1_DATABASE_H
 #define DIT_OOP_PROJECT_1_DATABASE_H
 #include <string>
-#include "sqlite3.h"
+#include <sqlite3.h>
 #include "pomodoro.h"
 using namespace std;
 class database {

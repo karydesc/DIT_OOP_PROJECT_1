@@ -4,7 +4,7 @@
 
 #include "database.h"
 #include <iostream>
-#include "sqlite3.h"
+#include <sqlite3.h>
 #include <string>
 #include <sstream>
 #include "myApp.h"
@@ -15,10 +15,12 @@ using namespace std;
 
 wxDECLARE_APP(myApp);
 database::database() { //constructor that is called in the onInit method
-    sqlite3_open("file.db", &db);
+    system("mkdir ../data");
+    sqlite3_open("../data/file.db", &db);
     string query = "CREATE TABLE IF NOT EXISTS database(user TEXT, pass TEXT,workmins INT,sessionsCompleted INT);"; //create a table if it doesnt exist with 4 columns: user,pass,workmins,sessionscompleted
     sqlite3_exec(db, query.c_str(), NULL, NULL, &error); //execture the query
     cout<<"Connected to database successfully!"<<endl;
+
 }
 
 
@@ -131,7 +133,7 @@ void database::storeStats(const string& user,pomodoro* session) {
 
     time_t now = time(nullptr); //getting current time and printing it on a txt file along with statistics
     char* data_time = ctime(&now);
-    string filename = "./data/"+user+".txt"; //create a file for each user that will store the statistics for viewing.
+    string filename = "../data/"+user+".txt"; //create a file for each user that will store the statistics for viewing.
 
     ofstream myFile(filename,ios::trunc);
     myFile << "Last Update: "<< data_time << " USER: " << wxGetApp().getUser() << "   Number of sessions:" << prevSC + ((session->sessionsCompleted - session-> lastCurrentSessionCount)) << "  Number of minutes worked: " << prevWM + (session->WorkSeconds/60 - session-> lastCurrentSessionMinutes) << endl;

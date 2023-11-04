@@ -34,9 +34,9 @@ wxEND_EVENT_TABLE();
 mainFrame::mainFrame(const wxString& title) : wxFrame(nullptr,wxID_ANY,title) { //calling the constructor of the base class
 
     panel = new wxPanel(this); //panel is needed to contain controls
-    headerpanel = new wxPanel(panel);
+    //headerpanel = new wxPanel(panel);
 
-    headerpanel->SetFont(this->GetFont().Scale(2.0));
+    //headerpanel->SetFont(this->GetFont().Scale(2.0));
 
     startButton = new wxButton(panel, startButtonID, "Start", wxPoint(35, 255), wxSize(100, 35));
 
@@ -52,9 +52,9 @@ mainFrame::mainFrame(const wxString& title) : wxFrame(nullptr,wxID_ANY,title) { 
 
     breakselect->SetValue(5);
 
-    wxStaticText *header = new wxStaticText(headerpanel, wxID_ANY, "Pomodoro GUI", wxPoint(50, 10),wxSize(200, 30)); //creating simple header
+    wxStaticText *header = new wxStaticText(panel, wxID_ANY, "Pomodoro GUI", wxPoint(50, 10),wxSize(200, 30)); //creating simple header
 
-    timer = new wxStaticText(headerpanel, wxID_ANY, "Press start to initiate a session", wxPoint(160, 150), wxSize(200,30)); //Creating a text field were the running time will be displayed
+    timer = new wxStaticText(panel, wxID_ANY, "Press start to initiate a session", wxPoint(160, 150), wxSize(200,30)); //Creating a text field were the running time will be displayed
 
     statButton = new wxButton(panel,statButtonID,"Log Statistics", wxPoint(500, 255), wxSize(100, 35));
 

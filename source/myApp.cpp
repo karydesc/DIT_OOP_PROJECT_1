@@ -28,7 +28,7 @@ bool myApp::OnInit(){
             cin>>user;
             cin>>pass;
              if (!myDB->authUser(user,pass)){
-                cout<<"Aborting...";
+                cout<<endl<<"Aborting...";
                 return false;
               }  else cout<<endl<<"Started GUI...";
              break;
