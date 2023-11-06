@@ -26,7 +26,7 @@ database::database() { //constructor that is called in the onInit method
 
 bool database::addUser(const string& user,  const string& pass) {
     stringstream query; //create a stringstream in which I will build the query
-    query << "SELECT pass FROM database WHERE user = '" << user << "';"; //grab the row in which the username is matched, to see if user already exists
+    query << "SELECT pass FROM database WHERE user = '" << user << "';"; //grab the row in which the user is matched, to see if user already exists
     rc = sqlite3_prepare_v2(db, query.str().c_str(), -1, &stmt, 0);
     if (rc != SQLITE_OK) {
         cout << "Error preparing statement: " << sqlite3_errmsg(db) << endl;
@@ -35,8 +35,9 @@ bool database::addUser(const string& user,  const string& pass) {
     }
     rc = sqlite3_step(stmt);
     if (rc == SQLITE_ROW) {
-        cout << "User already exists!"<<endl;
+        cout << "User already exists!..."<<endl<<"But authentication proceeds with found username: "<<endl;
         return authUser(user,pass);
+        
     }
 
 

@@ -25,10 +25,8 @@ void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,
 //restart pomodoro indefinitely
     while(true){
         secs = workminutes * 60;
-        wxGetApp().CallAfter([gauge,secs](){
+        wxGetApp().CallAfter([gauge,secs](){ //set the range of the gauge
             gauge->SetRange(secs);
-            cout<<gauge->GetValue()<<endl;
-            cout<<gauge->GetRange()<<endl;
         });
     for (int i = secs; i >= 0;) {
         if (this->cancelFlag) return;
@@ -43,8 +41,8 @@ void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,
         }
         std::this_thread::sleep_for(1s); //timer tick
     }
-    secs = breakminutes * 60;
-    wxGetApp().CallAfter([gauge,secs](){
+    secs = breakminutes * 60; //repeat for break session
+    wxGetApp().CallAfter([gauge,secs](){ //set the range of the gauge
             gauge->SetRange(secs);
     });
     for (int i = secs; i >= 0;) {
@@ -61,7 +59,7 @@ void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,
         std::this_thread::sleep_for(1s);
     }
     session->sessionsCompleted++;
-    wxSound::Play("./resources/SessionComplete.mp3");
+    wxSound::Play("../resources/SessionComplete.mp3");
 }
 }
 

@@ -68,7 +68,7 @@ mainFrame::mainFrame(const wxString& title) : wxFrame(nullptr,wxID_ANY,title) { 
 pomodoro* session = new pomodoro;
 
 void mainFrame::onStartButtonClick(wxCommandEvent &evt) {
-    wxSound::Play("./resources/Confirm.wav");
+    wxSound::Play("../resources/Confirm.wav");
     if (!session->processing) {
 
         if (session->backgroundThread.joinable())//reset thread if it's still running
@@ -99,7 +99,7 @@ void mainFrame::onStatButtonClick(wxCommandEvent &evt) {
 
 }
 void mainFrame::onCancelButtonClick(wxCommandEvent &evt) {
-    wxSound::Play("./resources/Cancel.wav"); //play sound
+    wxSound::Play("../resources/Cancel.wav"); //play sound
     session->cancelFlag=true; //set flags
     session->processing=false;
     session->resetScreen(this->timer, this->gauge);

@@ -22,6 +22,7 @@ bool myApp::OnInit(){
             cin>>user;
             cin>>pass;
             if(!myDB->addUser(user,pass)) return false;
+            
             break;
         case '2':
             cout<<"Input username and then a password: ";
