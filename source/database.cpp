@@ -24,8 +24,23 @@ database::database() { //constructor that is called in the onInit method
 }
 
 
-void database::addUser(const string& user,  const string& pass) {
-    //query with placeholders for the parameters
+bool database::addUser(const string& user,  const string& pass) {
+    stringstream query; //create a stringstream in which I will build the query
+    query << "SELECT pass FROM database WHERE user = '" << user << "';"; //grab the row in which the username is matched, to see if user already exists
+    rc = sqlite3_prepare_v2(db, query.str().c_str(), -1, &stmt, 0);
+    if (rc != SQLITE_OK) {
+        cout << "Error preparing statement: " << sqlite3_errmsg(db) << endl;
+        sqlite3_close(db);
+        return false;
+    }
+    rc = sqlite3_step(stmt);
+    if (rc == SQLITE_ROW) {
+        cout << "User already exists!"<<endl;
+        return authUser(user,pass);
+    }
+
+
+    //query with placeholders for the parameters, i would change it to use stringstream, but i am bored and it works just fine.
     const char* insertDataQuery = "INSERT INTO database(user, pass, workmins, sessionsCompleted) VALUES (?, ?, ?, ?);";
 
     rc = sqlite3_prepare_v2(db, insertDataQuery, -1, &stmt, 0);
@@ -33,22 +48,24 @@ void database::addUser(const string& user,  const string& pass) {
     if (rc != SQLITE_OK) {
         cout << "Error preparing statement: " << sqlite3_errmsg(db) << endl;
         sqlite3_close(db);
-        return;
+        return false;
     }
-
 
     sqlite3_bind_text(stmt, 1, user.c_str(), -1, SQLITE_STATIC); //bind values into the placeholders, I use stringstreams later
     sqlite3_bind_text(stmt, 2, pass.c_str(), -1, SQLITE_STATIC);
-
 
     rc = sqlite3_step(stmt); //execute the command
 
     if (rc != SQLITE_DONE) { //error handling
         cout << "Error executing statement: " << sqlite3_errmsg(db) << endl;
-    }else cout<<"Data inserted successfully"<<endl;
+    }else cout<<"User inserted successfully"<<endl;
 
     sqlite3_finalize(stmt); //finalize stmt
+    return true;
 }
+
+
+
 
 bool database::authUser(const string & user, const std::string & pass) {
     stringstream query; //create a stringstream in which I will build the query

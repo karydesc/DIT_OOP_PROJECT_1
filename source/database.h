@@ -10,7 +10,7 @@
 using namespace std;
 class database {
 public:
-    void addUser(const string&, const string&);
+    bool addUser(const string&, const string&);
     database();
     bool authUser(const string&,const string&);
     void close();
