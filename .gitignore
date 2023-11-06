@@ -1,8 +1,8 @@
-.data
+/data
 .idea
 .DS_Store?
 .DS_Store
 .Spotlight-V100
 *.exe
 *.o
-.cmake-build-debug
+/cmake-build-debug
