@@ -1,6 +1,7 @@
 .vscode
 /data
 /build
+.gitignore
 .idea
 .DS_Store?
 .DS_Store
