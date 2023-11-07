@@ -8,8 +8,16 @@
 #include "pomodoro.h"
 #include <wx/string.h>
 #include "myApp.h"
+#include <string>
 #include <wx/sound.h>
 #include "database.h"
+
+#ifdef _WIN32
+string openshell ="";
+#else
+string openshell ="open";
+#endif
+
 DECLARE_APP(myApp)
 using namespace std;
 
@@ -110,16 +118,14 @@ void mainFrame::OnClose(wxCloseEvent&e){
     session->quitRequested=true;
     if(session->processing)
     {
-        if(session->backgroundThread.joinable()){ //check if thread is running
+        if(session->backgroundThread.joinable()){ //check if thread is joinable
             session->backgroundThread.join(); // join with main thread
-            delete wxGetApp().GetDatabase();
-            delete session;
-
             this->Destroy(); //destroy window instance
+            delete session;
+            delete wxGetApp().GetDatabase();
         }
     }
     else{
-        wxGetApp().GetDatabase()->close();
         delete wxGetApp().GetDatabase();
         delete session;
         this->Destroy(); //if the timer isn't running destroy the window instance immediately
@@ -128,6 +134,6 @@ void mainFrame::OnClose(wxCloseEvent&e){
 }
 
 void mainFrame::onShowStatsClick(wxCommandEvent &evt) {
-    string shell="open ../data/"+wxGetApp().getUser()+".txt";
+    string shell=openshell+" ../data/"+wxGetApp().getUser()+".txt";
     system(shell.c_str());
 }

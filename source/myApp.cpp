@@ -7,6 +7,13 @@
 #include <wx/wx.h>
 #include "database.h"
 #include <iostream>
+#include <string>
+#ifdef _WIN32
+    string clear ="cls";
+#else
+    string clear ="clear";
+#endif
+
 //defining onInit method, it is the entry point of my application
 using namespace std;
 bool myApp::OnInit(){
@@ -17,7 +24,7 @@ bool myApp::OnInit(){
     cin>>choice;
     switch (choice){
         case '1':
-            system("clear");
+            system(clear.c_str()); //account for different shell commands, defined in line 11
             cout<<"Input username and then a password: ";
             cin>>user;
             cin>>pass;
@@ -25,6 +32,7 @@ bool myApp::OnInit(){
             
             break;
         case '2':
+            system(clear.c_str());
             cout<<"Input username and then a password: ";
             cin>>user;
             cin>>pass;
