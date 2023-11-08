@@ -13,14 +13,24 @@ Prerequisites:<br>
   	-cmake - optional<br><br>
 On a Unix-like terminal:<br>
 	``$ cd (ROOT_DIR)``<br>
-	``$ mkdir BUILD<``<br>
+	``$ mkdir build``<br>
  	``$ cd BUILD``<br>
   	``$ cmake ..``<br>
-   	``$ make``<br><br>
-if CMake is not present, navigate to the source folder after making your build dir and run the following commands:<br>
+   	``$ make``<br>
+        ``$./DIT_OOP_PROJECT_1``<br>
+
+<br>if CMake is not present, navigate to the source folder after making your build dir and run the following commands:<br>
 	`$ cd root/source;`<br>
 	``$ g++ myApp.cpp mainFrame.cpp pomodoro.cpp database.cpp `wx-config --libs --cxxflags` -lsqlite3 -o ../build/Pomodoro``
  	<br>NOTE: wx-config needs to be in your PATH environment variable in order for it to return the libs and flags to the compiler<br>
+
+  To compile the catch2 tests:<br>
+  ``$ cd (ROOT_DIR)/CatchTesting``<br>
+  ``$ mkdir build``<br>
+  ``$ cd build``<br>
+  ``$ cmake ..``<br>
+  ``$ make``<br><br>
+  ``$./Catchtesting``
 
   <br>To install the required libraries, you can use the package manager this is compatible/provided with your system.<br><br>
   For MacOS:<br>
