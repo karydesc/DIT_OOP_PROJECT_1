@@ -14,7 +14,7 @@ Prerequisites:<br>
 On a Unix-like terminal:<br>
 	``$ cd (ROOT_DIR)``<br>
 	``$ mkdir build``<br>
- 	``$ cd BUILD``<br>
+ 	``$ cd build``<br>
   	``$ cmake ..``<br>
    	``$ make``<br>
         ``$./DIT_OOP_PROJECT_1``<br>
