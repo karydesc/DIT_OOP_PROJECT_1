@@ -10,7 +10,6 @@
 #include "myApp.h"
 #include <string>
 #include <wx/sound.h>
-#include "database.h"
 
 #ifdef _WIN32
 string openshell ="";
@@ -60,7 +59,7 @@ mainFrame::mainFrame(const wxString& title) : wxFrame(nullptr,wxID_ANY,title) { 
 
     breakselect->SetValue(5);
 
-    wxStaticText *header = new wxStaticText(headerpanel, wxID_ANY, "Pomodoro GUI", wxPoint(50, 10),wxSize(200, 30)); //creating simple header
+    header = new wxStaticText(headerpanel, wxID_ANY, "Pomodoro GUI", wxPoint(50, 10),wxSize(200, 30)); //creating simple header
 
     timer = new wxStaticText(headerpanel, wxID_ANY, "Press start to initiate a session", wxPoint(160, 150), wxSize(200,30)); //Creating a text field were the running time will be displayed
 

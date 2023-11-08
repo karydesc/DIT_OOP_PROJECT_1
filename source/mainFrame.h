@@ -15,6 +15,7 @@ class mainFrame : public wxFrame {
 public:
     mainFrame(const wxString& title); //declare constructor that takes a wxstring by reference for the title of the frame
 private:
+    wxStaticText *header;
     wxStaticText *timer;
     wxSpinCtrl* timeselect;
     wxSpinCtrl* breakselect;
