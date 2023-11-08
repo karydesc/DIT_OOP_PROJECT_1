@@ -19,8 +19,8 @@ On a Unix-like terminal:<br>
    	``$ make``<br><br>
 if CMake is not present, navigate to the source folder after making your build dir and run the following commands:<br>
 	`$ cd root/source;`<br>
-	``$ g++ myApp.cpp mainFrame.cpp pomodoro.cpp database.cpp `wx-config --libs --cxxflags` -lsqlite3 -o ../build/Pomodoro``<br><br>
- 	NOTE: wx-config needs to be in your PATH environment variable in order for it to return the libs and flags to the compiler<br>
+	``$ g++ myApp.cpp mainFrame.cpp pomodoro.cpp database.cpp `wx-config --libs --cxxflags` -lsqlite3 -o ../build/Pomodoro``
+ 	<br>NOTE: wx-config needs to be in your PATH environment variable in order for it to return the libs and flags to the compiler<br>
 
   <br>To install the required libraries, you can use the package manager this is compatible/provided with your system.<br><br>
   For MacOS:<br>
