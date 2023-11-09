@@ -4,8 +4,6 @@ project(DIT_OOP_PROJECT_1)
 
 set(CMAKE_CXX_STANDARD 17)
 
-# Add the Catch2 library
-#find_package(Catch2 REQUIRED)
 
 # Add the source files to the executable
 add_executable(DIT_OOP_PROJECT_1
@@ -16,8 +14,6 @@ add_executable(DIT_OOP_PROJECT_1
 )
 find_package(SQLite3 REQUIRED)
 target_link_libraries(DIT_OOP_PROJECT_1 PRIVATE SQLite::SQLite3)
-#Include Catch2
-#target_link_libraries(DIT_OOP_PROJECT_1 PRIVATE Catch2::Catch2)
 
 # Include wxWidgets
 find_package(wxWidgets REQUIRED gl core base OPTIONAL_COMPONENTS net gui)
