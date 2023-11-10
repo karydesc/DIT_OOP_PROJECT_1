@@ -10,7 +10,6 @@
 #include <chrono>
 #include "myApp.h"
 #include <wx/sound.h>
-//#include <catch2/catch.hpp>
 
 
 using namespace std::chrono_literals;
