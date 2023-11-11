@@ -23,14 +23,15 @@ void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,
 
 //restart pomodoro indefinitely
     while(true){
-        secs = workminutes * 60;//set loop range
+        secs = workminutes * 60;
+        int j;
         wxGetApp().CallAfter([gauge,secs](){ //set the range of the gauge
             gauge->SetRange(secs);
         });
     for (int i = secs; i >= 0;) {
-        if (this->cancelFlag) return;//check if user has requested to cancel
+        if (this->cancelFlag) return;
         if (quitRequested) return; //handling window close/end thread
-        if (!this->pauseflag) { //the timer will tick and update the GUI ONLY if the flag is not set to true
+        if (!this->pauseflag) {
             session->WorkSeconds++;
             wxGetApp().CallAfter([i, text, gauge]() {
                 text->SetLabelText(wxString::Format("Focus: %d:%02d", i / 60, i % 60)); //updating the timer
@@ -40,6 +41,8 @@ void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,
         }
         std::this_thread::sleep_for(1s); //timer tick
     }
+    wxSound::Play("../resources/breaktime.mp3");
+
     secs = breakminutes * 60; //repeat for break session
     wxGetApp().CallAfter([gauge,secs](){ //set the range of the gauge
             gauge->SetRange(secs);
@@ -58,7 +61,13 @@ void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,
         std::this_thread::sleep_for(1s);
     }
     session->sessionsCompleted++;
-    wxSound::Play("../resources/SessionComplete.mp3");
+    wxSound::Play("../resources/sessioncomplete.mp3");
+    system("clear");
+    cout<<"Starting over in 5s...";
+    this_thread::sleep_for(5s);
+    system("clear");
+    wxSound::Play("../resources/sessionstart.mp3");
+
 }
 }
 
@@ -66,7 +75,7 @@ void pomodoro::pauseSession() {
     this->pauseflag= !pauseflag;
 }
 void pomodoro::resetScreen(wxStaticText* text, wxGauge* gauge){
-    wxGetApp().CallAfter([text,gauge]() { //clear the screen
+    wxGetApp().CallAfter([text,gauge]() {
         text->SetLabelText("Press start to initiate a session");
         gauge->SetValue(0);
     });

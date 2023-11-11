@@ -75,9 +75,8 @@ mainFrame::mainFrame(const wxString& title) : wxFrame(nullptr,wxID_ANY,title) { 
 pomodoro* session = new pomodoro;
 
 void mainFrame::onStartButtonClick(wxCommandEvent &evt) {
-    wxSound::Play("../resources/Confirm.wav");
     if (!session->processing) {
-
+        wxSound::Play("../resources/sessionstart.mp3");
         if (session->backgroundThread.joinable())//reset thread if it's still running
         {
             session->backgroundThread.join();
@@ -101,7 +100,7 @@ void mainFrame::onPauseButtonClick(wxCommandEvent &evt) {
 
 void mainFrame::onStatButtonClick(wxCommandEvent &evt) {
     wxGetApp().GetDatabase()->storeStats(wxGetApp().getUser(),session); //all database operations are called through the myApp class,
-    //because the initial instance of the database is started in the onInit() function and i couldnt not make it be accessible to the rest of the classes in any other way.
+    //because the initial instance of the database is started in the onInit() function and i couldnt  make it be accessible to the rest of the classes in any other way.
 
 
 }
@@ -109,6 +108,7 @@ void mainFrame::onCancelButtonClick(wxCommandEvent &evt) {
     wxSound::Play("../resources/Cancel.wav"); //play sound
     session->cancelFlag=true; //set flags
     session->processing=false;
+    if (session->backgroundThread.joinable()) session->backgroundThread.join();
     session->resetScreen(this->timer, this->gauge);
 }
 

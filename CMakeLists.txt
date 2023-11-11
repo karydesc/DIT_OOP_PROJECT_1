@@ -13,9 +13,7 @@ add_executable(DIT_OOP_PROJECT_1
         source/database.cpp
 )
 find_package(SQLite3 REQUIRED)
-target_link_libraries(DIT_OOP_PROJECT_1 PRIVATE SQLite::SQLite3)
-
 # Include wxWidgets
 find_package(wxWidgets REQUIRED gl core base OPTIONAL_COMPONENTS net gui)
 include(${wxWidgets_USE_FILE})
-target_link_libraries(DIT_OOP_PROJECT_1 PRIVATE ${wxWidgets_LIBRARIES})
+target_link_libraries(DIT_OOP_PROJECT_1 PRIVATE ${wxWidgets_LIBRARIES} PRIVATE SQLite::SQLite3)
