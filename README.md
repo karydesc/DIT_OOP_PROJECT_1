@@ -1,4 +1,4 @@
-Compile Instructions:<br>
+## Compile Instructions:<br>
 
 WARNING: The following instructions/codes have only been tested in a macOS/Linux environment <br>
 
