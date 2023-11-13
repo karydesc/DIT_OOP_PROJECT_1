@@ -1,6 +1,6 @@
 ## Compile Instructions:<br>
 
-WARNING: The following instructions/codes have only been tested in a macOS/Linux environment <br>
+WARNING: The following instructions/codes have only been tested in a macOS/Linux environment 
 
 The code should theortetically work on Windows as well, however compile instructions cannot be provided.<br><br>
 
