@@ -77,10 +77,10 @@ pomodoro* session = new pomodoro;
 void mainFrame::onStartButtonClick(wxCommandEvent &evt) {
     if (!session->processing) {
         wxSound::Play("../resources/sessionstart.mp3");
-        if (session->backgroundThread.joinable())//reset thread if it's still running
-        {
-            session->backgroundThread.join();
-        }
+//        if (session->backgroundThread.joinable())//reset thread if it's still running
+//        {
+//            session->backgroundThread.join();
+//        }
         session->processing = true; //setting flags
 
         const auto f = [this]() {
@@ -106,9 +106,12 @@ void mainFrame::onStatButtonClick(wxCommandEvent &evt) {
 }
 void mainFrame::onCancelButtonClick(wxCommandEvent &evt) {
     wxSound::Play("../resources/Cancel.wav"); //play sound
-    session->cancelFlag=true; //set flags
-    session->processing=false;
-    session->backgroundThread.detach();
+    if (session->processing){
+        session->resetScreen(this->timer, this->gauge);
+        session->cancelFlag=true; //set flags
+        session->processing=false;
+        session->backgroundThread.join();
+    }else
     session->resetScreen(this->timer, this->gauge);
 }
 
