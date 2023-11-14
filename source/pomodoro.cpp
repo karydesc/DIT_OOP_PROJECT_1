@@ -24,13 +24,15 @@ void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,
 //restart pomodoro indefinitely
     while(true){
         secs = workminutes * 60;
-        int j;
         wxGetApp().CallAfter([gauge,secs](){ //set the range of the gauge
             gauge->SetRange(secs);
         });
     for (int i = secs; i >= 0;) {
-        if (this->cancelFlag) return;
-        if (quitRequested) return; //handling window close/end thread
+        if (this->cancelFlag||quitRequested){
+            this->processing=false;
+            return;
+        }       //handling window close/end thread
+
         if (!this->pauseflag) {
             session->WorkSeconds++;
             wxGetApp().CallAfter([i, text, gauge]() {
@@ -48,8 +50,11 @@ void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,
             gauge->SetRange(secs);
     });
     for (int i = secs; i >= 0;) {
-        if (this->cancelFlag) return;
-        if (quitRequested) return;
+        if (this->cancelFlag||quitRequested){
+            this->processing=false;
+            return;
+        }
+
         if(!this->pauseflag){
             wxGetApp().CallAfter([i, text, gauge]() {
                 text->SetLabelText(wxString::Format("Break: %d:%02d", i / 60, i % 60));
@@ -80,3 +85,4 @@ void pomodoro::resetScreen(wxStaticText* text, wxGauge* gauge){
         gauge->SetValue(0);
     });
 }
+

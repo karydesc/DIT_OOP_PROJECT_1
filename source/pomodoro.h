@@ -21,7 +21,6 @@ public:
     int lastCurrentSessionCount=0;
     int WorkSeconds;
     int sessionsCompleted=0;
-private:
 
 };
 
