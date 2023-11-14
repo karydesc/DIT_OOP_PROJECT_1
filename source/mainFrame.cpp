@@ -108,7 +108,7 @@ void mainFrame::onCancelButtonClick(wxCommandEvent &evt) {
     wxSound::Play("../resources/Cancel.wav"); //play sound
     session->cancelFlag=true; //set flags
     session->processing=false;
-    if (session->backgroundThread.joinable()) session->backgroundThread.join();
+    session->backgroundThread.detach();
     session->resetScreen(this->timer, this->gauge);
 }
 
@@ -117,12 +117,11 @@ void mainFrame::OnClose(wxCloseEvent&e){
     session->quitRequested=true;
     if(session->processing)
     {
-        if(session->backgroundThread.joinable()){ //check if thread is joinable
-            session->backgroundThread.join(); // join with main thread
+            session->backgroundThread.detach();
             this->Destroy(); //destroy window instance
             delete session;
             delete wxGetApp().GetDatabase();
-        }
+
     }
     else{
         delete wxGetApp().GetDatabase();

@@ -10,7 +10,7 @@
 #include <string>
 #ifdef _WIN32
     #include <windows.h>
-    string clear ="cls";
+    string cls ="cls";
 #else
     #include<unistd.h>
     #include <termios.h>
@@ -24,6 +24,7 @@ string getch();
     //defining onInit method, it is the entry point of my application
 using namespace std;
 bool myApp::OnInit(){
+    system(cls.c_str());
     myDB = new database(); //create a new database object
     char choice; //var to store choice
     string pass; //very insecure way of storing passwords but no security is truly needed for this program
