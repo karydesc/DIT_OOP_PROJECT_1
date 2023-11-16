@@ -1,6 +1,7 @@
 ## Compile Instructions:<br>
 
-WARNING: The following instructions/codes have only been tested in a macOS/Linux environment 
+WARNING: The following instructions/codes have only been tested in a macOS/Linux environment. <br>
+<br> WARNING #2: It has been noted that on OS's different than MacOS Sonoma (not definitive, but has only been tested so), the code needs some minor tweaks on order for the timer to display correctly. wxWidgets has to have been compiled in that environment. Example: wxwidgets that was compiled on macos catalina will have the same issue (even when running on newer). Instructions for the code tweak will be provided at the end of the file.
 
 The code should theortetically work on Windows as well, however compile instructions cannot be provided.<br><br>
 
@@ -95,3 +96,9 @@ Then run:<br>
 Since there is no universal package manager for all Linux distros, you will need to research the names of the packages on your own<br>
 
 Example: for Ubuntu, apt is the default manager:<br>
+
+
+## Tweak Instructions:
+<br>mainFrame.cpp:
+<br>Line 44: Delete Line
+
