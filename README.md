@@ -50,7 +50,7 @@ NOTE: wx-config needs to be in your PATH environment variable in order for it to
 
 if CMake is not present, navigate to the source folder after making your build dir and run the following commands:<br>
 
-`$ cd root/source;`<br>
+`$ cd (ROOT_DIR)/source;`<br>
 
 ``$ g++ myApp.cpp mainFrame.cpp pomodoro.cpp database.cpp `wx-config --libs --cxxflags` -lsqlite3 -o ../build/Pomodoro``
 
