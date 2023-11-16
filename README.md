@@ -86,7 +86,7 @@ Then run:<br>
 
 `` $brew update``<br>
 
-`` $brew install sqlite3``<br>
+`` $brew install sqlite``<br>
 
 `` $brew install wxwidgets``<br>
 
@@ -101,4 +101,6 @@ Example: for Ubuntu, apt is the default manager:<br>
 ## Tweak Instructions:
 <br>mainFrame.cpp:
 <br>Line 44: Delete Line
-
+<br>Line 46:Delete Line
+<br>Line 62: Change headerpanel -> panel
+<br>Line 63: Change headerpanel -> panel
