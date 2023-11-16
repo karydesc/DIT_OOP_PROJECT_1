@@ -88,9 +88,11 @@ Then run:<br>
 
 `` $brew install sqlite``<br>
 
+`` $brew install cmake``<br>
+
 `` $brew install wxwidgets``<br>
 
-``$brew install cmake``<br>
+
 
 ## Linux:
 Since there is no universal package manager for all Linux distros, you will need to research the names of the packages on your own<br>
