@@ -26,6 +26,7 @@ enum IDs{
     statButtonID=4,
     cancelButtonID=5,
     showstatID=6
+
 };
 wxBEGIN_EVENT_TABLE(mainFrame,wxFrame)
                 EVT_BUTTON(startButtonID,mainFrame::onStartButtonClick)
@@ -84,9 +85,6 @@ void mainFrame::onStartButtonClick(wxCommandEvent &evt) {
 
         const auto f = [this]() {
             session->startSession(timeselect->GetValue(), breakselect->GetValue(), timer, gauge, session);
-            wxGetApp().CallAfter([this]() {
-                session->processing = false;
-            });
         };
         session->backgroundThread = std::thread{f};
     }
@@ -116,12 +114,15 @@ void mainFrame::onCancelButtonClick(wxCommandEvent &evt) {
     if(session->processing)
     {
             session->backgroundThread.detach();
-            this->Destroy(); //destroy window instance
             delete session;
             delete wxGetApp().GetDatabase();
+            this->Destroy(); //destroy window instance
+
 
     }
     else{
+        if (session->backgroundThread.joinable()){
+            session->backgroundThread.join();}
         delete wxGetApp().GetDatabase();
         delete session;
         this->Destroy(); //if the timer isn't running destroy the window instance immediately
