@@ -76,9 +76,10 @@ mainFrame::mainFrame(const wxString& title) : wxFrame(nullptr,wxID_ANY,title) { 
 pomodoro* session = new pomodoro;
 
 void mainFrame::onStartButtonClick(wxCommandEvent &evt) {
-    if (!session->processing) {
+    if (breakselect->GetValue()==0 || timeselect->GetValue()==0) return; //if either spincontrol is 0 the timer wont start
+    if (!session->processing) { //only run if previous thread has finished work
         wxSound::Play("../resources/sessionstart.mp3");
-        if (session->backgroundThread.joinable())//reset thread if it's still running
+        if (session->backgroundThread.joinable())//join thread with main thread
        {
             session->backgroundThread.join();
         }

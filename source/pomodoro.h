@@ -8,20 +8,24 @@
 #include <thread>
 
 class pomodoro {
-public:
-     void startSession(int,int,wxStaticText*,wxGauge*,pomodoro*);
-     void pauseSession();
-     void resetScreen(wxStaticText *text, wxGauge *gauge);
-     bool quitRequested=false;
-     bool processing=false;
-     std::thread backgroundThread;
-     bool pauseflag=false;
-     bool cancelFlag=false;
+private:
+    bool pauseflag=false;
     int lastCurrentSessionMinutes=0;
     int lastCurrentSessionCount=0;
     int WorkSeconds;
     int sessionsCompleted=0;
+public:
+    bool processing=false;
+    bool quitRequested=false;
+    std::thread backgroundThread;
+    bool cancelFlag=false;
 
+
+    void startSession(int workmins,int breakmins,wxStaticText*,wxGauge*,pomodoro*);
+    void pauseSession();
+    void resetScreen(wxStaticText *text, wxGauge *gauge);
+
+    friend class database;
 };
 
 
