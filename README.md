@@ -5,10 +5,6 @@ WARNING: The following instructions/codes have only been tested in a macOS/Linux
 
 The code should theortetically work on Windows as well, however compile instructions cannot be provided.<br><br>
 
-Prerequisites:<br>
-
-The code should theortetically work on Windows as well, however compile instructions cannot be provided.<br>
-
 Prerequisites:<br><br>
 
 -A C++ compiler<br>
