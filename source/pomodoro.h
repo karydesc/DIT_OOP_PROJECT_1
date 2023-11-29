@@ -21,7 +21,7 @@ public:
     bool cancelFlag=false;
 
 
-    void startSession(int workmins,int breakmins,wxStaticText*,wxGauge*,pomodoro*);
+    void startSession(int workmins,int breakmins,wxStaticText*,wxGauge*);
     void pauseSession();
     void resetScreen(wxStaticText *text, wxGauge *gauge);
 

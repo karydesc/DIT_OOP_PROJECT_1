@@ -15,8 +15,8 @@
 using namespace std::chrono_literals;
 using namespace std;
 wxDECLARE_APP(myApp);
-void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,wxGauge* gauge,pomodoro* session) {
-    session->processing =true;
+void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,wxGauge* gauge) {
+    this->processing =true;
     int secs;
     pauseflag=false;
     cancelFlag=false;
@@ -34,7 +34,7 @@ void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,
         }       //handling window close/end thread
 
         if (!this->pauseflag) {
-            session->WorkSeconds++;
+            this->WorkSeconds++;
             wxGetApp().CallAfter([i, text, gauge]() {
                 text->SetLabelText(wxString::Format("Focus: %d:%02d", i / 60, i % 60)); //updating the timer
                 gauge->SetValue(i);
@@ -65,7 +65,7 @@ void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,
         }
         std::this_thread::sleep_for(1s);
     }
-    session->sessionsCompleted++;
+    this->sessionsCompleted++;
     wxSound::Play("../resources/sessioncomplete.mp3");
     system("clear");
     cout<<"Starting over in 5s...";
