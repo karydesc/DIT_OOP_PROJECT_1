@@ -9,12 +9,14 @@
 #include <iostream>
 #include <string>
 #ifdef _WIN32
+#define os 2
     #include <windows.h>
-    string cls ="cls";
+    string clearstring ="clearstring";
 #else
-    #include<unistd.h>
+    #define os 1
+    #include <unistd.h>
     #include <termios.h>
-    string cls ="clear";
+    string clearstring ="clear";
 #endif
 
 
@@ -24,7 +26,7 @@ string getch();
     //defining onInit method, it is the entry point of my application
 using namespace std;
 bool myApp::OnInit(){
-    system(cls.c_str());
+    system(clearstring.c_str());
     myDB = new database(); //create a new database object
     char choice; //var to store choice
     string pass; //very insecure way of storing passwords but no security is truly needed for this program
@@ -33,7 +35,7 @@ bool myApp::OnInit(){
 
     switch (choice){
         case '1':
-            system(cls.c_str()); //account for different shell commands, defined in line 11
+            system(clearstring.c_str()); //account for different shell commands, defined in line 11
             cout<<"Input username and then a password: ";
             cin>>user;
             pass=getch();
@@ -42,7 +44,7 @@ bool myApp::OnInit(){
             
             break;
         case '2':
-            system(cls.c_str());
+            system(clearstring.c_str());
             cout<<"Input username and then a password: ";
             cin>>user;
             pass=getch();
@@ -65,22 +67,32 @@ bool myApp::OnInit(){
 wxIMPLEMENT_APP(myApp);
 
 string getch() { // I copied this code from: https://dev.to/namantam1/how-to-take-hidden-password-from-terminal-in-cc-3ddd
-    string ch;//but I understand how it works perfectly
-    // struct to hold the terminal settings
-    struct termios old_settings, new_settings;
-    // take default setting in old_settings
-    tcgetattr(STDIN_FILENO, &old_settings);
-    // make of copy of it (Read my previous blog to know
-    // more about how to copy struct)
-    new_settings = old_settings;
-    // change the settings for by disabling ECHO mode
-    // read man page of termios.h for more settings info
-    new_settings.c_lflag &= ~(ICANON | ECHO);
-    // apply these new settings
-    tcsetattr(STDIN_FILENO, TCSANOW, &new_settings);
-    // now take the input in this mode
-    cin>>ch;
-    // reset back to default settings
-    tcsetattr(STDIN_FILENO, TCSANOW, &old_settings);
-    return ch;
+    string ch;
+    switch (os) {
+        case 1:
+           //but I understand how it works perfectly
+            // struct to hold the terminal settings
+            struct termios old_settings, new_settings;
+            // take default setting in old_settings
+            tcgetattr(STDIN_FILENO, &old_settings);
+            // make of copy of it (Read my previous blog to know
+            // more about how to copy struct)
+            new_settings = old_settings;
+            // change the settings for by disabling ECHO mode
+            // read man page of termios.h for more settings info
+            new_settings.c_lflag &= ~(ICANON | ECHO);
+            // apply these new settings
+            tcsetattr(STDIN_FILENO, TCSANOW, &new_settings);
+            // now take the input in this mode
+            cin>>ch;
+            // reset back to default settings
+            tcsetattr(STDIN_FILENO, TCSANOW, &old_settings);
+            return ch;
+        case 2:
+            cin >> ch;
+            return ch;
+
+    }
+
+
 }

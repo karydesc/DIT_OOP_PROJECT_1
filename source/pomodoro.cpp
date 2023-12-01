@@ -11,6 +11,13 @@
 #include "myApp.h"
 #include <wx/sound.h>
 
+#ifdef _WIN32
+#include <windows.h>
+    string cls ="cls";
+#else
+string cls ="clear";
+#endif
+
 
 using namespace std::chrono_literals;
 using namespace std;
@@ -67,10 +74,10 @@ void pomodoro::startSession(int workminutes,int breakminutes,wxStaticText* text,
     }
     this->sessionsCompleted++;
     wxSound::Play("../resources/sessioncomplete.mp3");
-    system("clear");
+    system(cls.c_str());
     cout<<"Starting over in 5s...";
     this_thread::sleep_for(5s);
-    system("clear");
+    system(cls.c_str());
     wxSound::Play("../resources/sessionstart.mp3");
 
 }

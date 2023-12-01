@@ -85,7 +85,7 @@ void mainFrame::onStartButtonClick(wxCommandEvent &evt) {
         }
 
         const auto f = [this]() {
-            session->startSession(timeselect->GetValue(), breakselect->GetValue(), timer, gauge, session);
+            session->startSession(timeselect->GetValue(), breakselect->GetValue(), timer, gauge);
         };
         session->backgroundThread = std::thread{f};
     }
